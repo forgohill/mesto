@@ -1,5 +1,4 @@
 /* ======================= VENDOR =============================== */
-
 @import url(../vendor/normalize.css);
 @import url(../vendor/fonts/fonts.css);
 
@@ -21,3 +20,13 @@
 @import url(../blocks/profile/__mission/profile__mission.css);
 @import url(../blocks/profile/__btn-edit/profile__btn-edit.css);
 @import url(../blocks/profile/__btn-add/profile__btn-add.css);
+
+/* ======================= GRID-PLACES =============================== */
+@import url(../blocks/grid-places/grid-places.css);
+@import url(../blocks/grid-places/__cards/grid-places__cards.css);
+@import url(../blocks/grid-places/__list/grid-places__list.css);
+@import url(../blocks/grid-places/__container/grid-places__container.css);
+@import url(../blocks/grid-places/__image/grid-places__image.css);
+@import url(../blocks/grid-places/__wrapper/grid-places__wrapper.css);
+@import url(../blocks/grid-places/__title/grid-places__title.css);
+@import url(../blocks/grid-places/__btn-like/grid-places__btn-like.css);
