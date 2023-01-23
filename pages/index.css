@@ -30,3 +30,7 @@
 @import url(../blocks/grid-places/__wrapper/grid-places__wrapper.css);
 @import url(../blocks/grid-places/__title/grid-places__title.css);
 @import url(../blocks/grid-places/__btn-like/grid-places__btn-like.css);
+
+/* ======================= FOOTER =============================== */
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__paragraph/footer__paragraph.css);
