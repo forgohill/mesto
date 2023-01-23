@@ -1,0 +1,5 @@
+.header__link {
+  display: block;
+
+  max-width: fit-content;
+}
