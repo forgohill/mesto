@@ -1,0 +1,13 @@
+.grid-places__image {
+  display: flex;
+  margin: 0 auto;
+  padding: 0;
+
+  height: 282px;
+  width: 100%;
+
+  /* width: fit-content; */
+
+  object-fit: cover;
+  object-position: center;
+}
