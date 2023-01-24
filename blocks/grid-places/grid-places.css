@@ -1,0 +1,24 @@
+.grid-places {
+  max-width: 880px;
+  box-sizing: border-box;
+
+  margin: 0 auto;
+  padding: 0;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
+  row-gap: 20px;
+  column-gap: 17px;
+}
+
+@media screen and (max-width: 920px) {
+  .grid-places {
+    max-width: 581px
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .grid-places {
+    max-width: 282px
+  }
+}

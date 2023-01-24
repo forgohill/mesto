@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Проект: Место</title>
+  <link rel="stylesheet" href="./pages/index.css">
+</head>
+
+<body>
+
+  <div class="page">
+    <header class="header">
+      <a href="#" class="header__link links" title="Переход на главную - проект: место."><img
+          src="./images/header__logo.svg" alt="Логотип проекта Место" class="header__logo"></a>
+    </header>
+
+    <main class="main">
+      <section class="profile">
+        <div class="profile__container">
+          <img src="./images/profile__avatar.jpg" alt="Фотография Жак-Ив-Кусто" class="profile__avatar">
+          <div class="profile__info">
+            <div class="profile__wrapper">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <p class="profile__mission">Исследователь океана</p>
+            </div>
+            <button class="profile__btn-edit links"></button>
+          </div>
+        </div>
+        <button class="profile__btn-add links"></button>
+      </section>
+
+      <section class="grid-places">
+        <article class="grid-places__cards">
+          <img src="./images/grid-places__pizunda.jpg" alt="Фотография пляжа в Пицунде" class="grid-places__image">
+          <ul class="grid-places__wrapper">
+            <li class="grid-places__list">
+              <h2 class="grid-places__title">Пицунда</h2>
+            </li>
+            <li class="grid-places__list">
+              <button class="grid-places__btn-like grid-places__btn-like_active"></button>
+            </li>
+          </ul>
+        </article>
+        <article class="grid-places__cards">
+          <img src="./images/grid-places__birobidzhan.jpg" alt="Фотография природы Биробиджана: полевые цветы"
+            class="grid-places__image">
+          <ul class="grid-places__wrapper">
+            <li class="grid-places__list">
+              <h2 class="grid-places__title">Биробиджан</h2>
+            </li>
+            <li class="grid-places__list">
+              <button class="grid-places__btn-like"> </button>
+            </li>
+          </ul>
+        </article>
+        <article class="grid-places__cards">
+          <img src="./images/grid-places__blagoveshchensk.jpg" alt="Фотография проироды Благовещенска: лошадь ест траву"
+            class="grid-places__image">
+          <ul class="grid-places__wrapper">
+            <li class="grid-places__list">
+              <h2 class="grid-places__title">Благовещенск</h2>
+            </li>
+            <li class="grid-places__list">
+              <button class="grid-places__btn-like"></button>
+            </li>
+          </ul>
+        </article>
+        <article class="grid-places__cards">
+          <img src="./images/grid-places__nizhni-novgorod.jpg"
+            alt="Фотография строящегося дома на откосе Нижнего Новгорода" class="grid-places__image">
+          <ul class="grid-places__wrapper">
+            <li class="grid-places__list">
+              <h2 class="grid-places__title">Нижний Новгород</h2>
+            </li>
+            <li class="grid-places__list">
+              <button class="grid-places__btn-like"></button>
+            </li>
+          </ul>
+        </article>
+        <article class="grid-places__cards">
+          <img src="./images/grid-places__suzdal.jpg" alt="Фотография дома с огромной антенной в Суздале"
+            class="grid-places__image">
+          <ul class="grid-places__wrapper">
+            <li class="grid-places__list">
+              <h2 class="grid-places__title">Суздаль</h2>
+            </li>
+            <li class="grid-places__list">
+              <button class="grid-places__btn-like"></button>
+            </li>
+          </ul>
+        </article>
+        <article class="grid-places__cards">
+          <img src="./images/grid-places__donguz-orun.jpg"
+            alt="Фотография ледника Семерка - восточный склон горы Донгуз-Орун" class="grid-places__image">
+          <ul class="grid-places__wrapper">
+            <li class="grid-places__list">
+              <h2 class="grid-places__title">Донгуз-Орун</h2>
+            </li>
+            <li class="grid-places__list">
+              <button class="grid-places__btn-like"></button>
+            </li>
+          </ul>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__paragraph">&#169; 2023 Mesto Russia</p>
+    </footer>
+
+    <div class="popup">
+      <article class="popup__container">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="popup__form">
+          <input type="text" name="inputName" class="popup__name">
+          <input type="text" name="inputMission" class="popup__mission">
+          <button type="submit" class="popup__submit">Сохранить</button>
+        </form>
+        <button type="button" class="popup__close"></button>
+      </article>
+    </div>
+  </div>
+
+  <script src="./pages/index.js"></script>
+</body>
+
+</html>
