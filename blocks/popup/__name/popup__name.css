@@ -1,5 +1,6 @@
 .popup__name {
   min-height: 26px;
+  box-sizing: content-box;
 
   margin: 0;
   padding: 0;
@@ -16,4 +17,8 @@
   line-height: 1.21;
 
   color: #000000;
+}
+
+.popup__name:focus {
+  border: 1px solid skyblue;
 }
