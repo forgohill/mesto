@@ -1,4 +1,8 @@
 # Проект: Место
+
+
+![image](https://github.com/forgohill/mesto/blob/main/images/project__mesto.gif)
+
 * [Ссылка на проект](https://forgohill.github.io/mesto//)
 
 ### Разработка проекта Mesto: базовая функциональность - интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки.
