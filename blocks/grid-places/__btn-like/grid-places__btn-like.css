@@ -6,7 +6,6 @@
   background: url(../../../images/__like.svg) 0 0 no-repeat;
   background-position: center;
 
-
   margin: 0;
   padding: 0;
   border: 0;
@@ -14,4 +13,11 @@
   background-color: transparent;
 
   cursor: pointer;
+
+
+}
+
+.grid-places__btn-like:hover {
+  transition: 0.5s;
+  opacity: 0.5;
 }

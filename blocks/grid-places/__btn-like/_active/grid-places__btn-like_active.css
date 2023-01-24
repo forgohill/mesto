@@ -1,0 +1,4 @@
+.grid-places__btn-like_active {
+  background-image: url(../../../../images/__like_active.svg);
+  background-position: center;
+}

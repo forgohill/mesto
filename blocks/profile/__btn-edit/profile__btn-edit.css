@@ -2,12 +2,14 @@
   width: 24px;
   height: 24px;
 
-  background: url(../../../images/profile__btn-edit.svg) 0 0 / 100% no-repeat;
+  background: url(../../../images/profile__btn-edit.svg) no-repeat;
+  background-size: 10px 10px;
+  background-position: center;
 
 
   margin: 15px 0 0;
   padding: 0;
-  border: 0;
+  border: 1px solid #fff;
   outline: none;
   background-color: transparent;
 
@@ -23,6 +25,8 @@
 
     width: 18px;
     height: 18px;
+
+    background-size: 7.5px 7.5px;
 
     margin: 8px 0 0;
   }

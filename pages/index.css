@@ -30,6 +30,7 @@
 @import url(../blocks/grid-places/__wrapper/grid-places__wrapper.css);
 @import url(../blocks/grid-places/__title/grid-places__title.css);
 @import url(../blocks/grid-places/__btn-like/grid-places__btn-like.css);
+@import url(../blocks/grid-places/__btn-like/_active/grid-places__btn-like_active.css);
 
 /* ======================= FOOTER =============================== */
 @import url(../blocks/footer/footer.css);
@@ -45,3 +46,6 @@
 @import url(../blocks/popup/__mission/popup__mission.css);
 @import url(../blocks/popup/__submit/popup__submit.css);
 @import url(../blocks/popup/__close/popup__close.css);
+
+/* ======================= LINKS =============================== */
+@import url(../blocks/links/links.css);

@@ -1,4 +1,5 @@
 .profile__mission {
+  max-width: 294px;
   margin: 7px 0 0;
   padding: 0;
   font-family: 'Inter', Arial, sans-serif;
@@ -8,11 +9,17 @@
   line-height: 1.22;
 
   color: #FFFFFF;
+
+  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+  overflow: hidden;
 }
 
 @media screen and (max-width: 430px) {
   .profile__mission {
+    max-width: 225px;
     font-size: 14px;
     line-height: 1.21;
+    text-align: center;
   }
 }

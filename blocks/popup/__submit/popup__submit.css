@@ -14,7 +14,12 @@
   line-height: 22px;
   text-align: center;
   color: #FFFFFF;
-  background-color: black;
+  background-color: #000;
+}
+
+.popup__submit:hover {
+  transition: 0.5s;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 @media screen and (max-width: 500px) {
