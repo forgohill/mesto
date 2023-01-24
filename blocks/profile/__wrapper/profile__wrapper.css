@@ -3,24 +3,6 @@
   flex-direction: column;
   justify-content: flex-start;
 
-
-
-
-  margin: 0 0;
+  margin: 0;
   padding: 0;
 }
-
-@media screen and (max-width: 768px) {
-  .profile__wrapper {
-
-    align-items: center;
-    /* max-width: 378px; */
-    /* padding: 0 0 0 42px; */
-  }
-}
-
-/* @media screen and (max-width: 430px) {
-  .profile__wrapper {
-
-  }
-} */

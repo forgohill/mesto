@@ -6,7 +6,6 @@
   background-size: 10px 10px;
   background-position: center;
 
-
   margin: 15px 0 0;
   padding: 0;
   border: 1px solid #fff;
@@ -20,14 +19,13 @@
   .profile__btn-edit {
     position: absolute;
     right: -28px;
-    top: -2px;
-
+    top: 6px;
 
     width: 18px;
     height: 18px;
 
     background-size: 7.5px 7.5px;
 
-    margin: 8px 0 0;
+    margin: 0;
   }
 }

@@ -8,7 +8,5 @@
 @media screen and (max-width: 768px) {
   .profile__container {
     flex-direction: column;
-
-    /* max-width: 336px; */
   }
 }
