@@ -10,3 +10,9 @@
     flex-direction: column;
   }
 }
+
+@media screen and (max-width: 430px) {
+  .profile__container {
+    max-width: 282px;
+  }
+}

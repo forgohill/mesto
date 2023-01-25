@@ -1,4 +1,6 @@
 .popup {
+  max-width: 100%;
+
   position: fixed;
 
   display: none;
