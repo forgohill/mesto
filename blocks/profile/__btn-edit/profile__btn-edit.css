@@ -2,9 +2,7 @@
   width: 24px;
   height: 24px;
 
-  background: url(../../../images/profile__btn-edit.svg) no-repeat;
-  background-size: 10px 10px;
-  background-position: center;
+  background: url(../../../images/profile__btn-edit.svg) center / 10px 10px no-repeat;
 
   margin: 15px auto 0;
   padding: 0;
