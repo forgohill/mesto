@@ -3,15 +3,12 @@
 
   width: 22px;
   height: 19px;
-  background: url(../../../images/__like.svg) 0 0 no-repeat;
-  background-position: center;
 
   margin: 0;
   padding: 0;
   border: 0;
   outline: none;
-  background-color: transparent;
-
+  background: url(../../../images/__like.svg) center / 100% no-repeat transparent;
   cursor: pointer;
 }
 
