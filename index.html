@@ -31,54 +31,55 @@
       </section>
 
       <section class="grid-places">
-        <article class="grid-places__cards">
+        <article class="grid-places__cards cards">
           <img src="./images/grid-places__pizunda.jpg" alt="Пляж в Пицунде, Абхазия. Фотография."
-            class="grid-places__image">
-          <div class="grid-places__wrapper">
-            <h2 class="grid-places__title">Пицунда</h2>
-            <button type="button" aria-label="Понравилось" class="grid-places__btn-like"></button>
+            class="grid-places__image cards__image">
+          <div class="grid-places__wrapper cards__wrapper">
+            <h2 class="grid-places__title cards__title">Пицунда</h2>
+            <button type="button" aria-label="Понравилось" class="grid-places__btn-like cards__btn-like"></button>
           </div>
         </article>
-        <article class="grid-places__cards">
+        <article class="grid-places__cards cards">
           <img src="./images/grid-places__birobidzhan.jpg" alt="Природа Биробиджана: полевые цветы. Фотография."
-            class="grid-places__image">
-          <div class="grid-places__wrapper">
-            <h2 class="grid-places__title">Биробиджан</h2>
-            <button type="button" aria-label="Понравилось" class="grid-places__btn-like"> </button>
+            class="cards__image">
+          <div class="cards__wrapper">
+            <h2 class="cards__title">Биробиджан</h2>
+            <button type="button" aria-label="Понравилось" class="cards__btn-like">
+            </button>
           </div>
         </article>
-        <article class="grid-places__cards">
+        <article class="grid-places__cards cards">
           <img src="./images/grid-places__blagoveshchensk.jpg"
             alt="Природа Благовещенска. Голова лошади крупным планом, высунута из за ограды и есть траву. Фотография."
-            class="grid-places__image">
-          <div class="grid-places__wrapper">
-            <h2 class="grid-places__title">Благовещенск</h2>
-            <button type="button" aria-label="Понравилось" class="grid-places__btn-like"></button>
+            class="cards__image">
+          <div class="cards__wrapper">
+            <h2 class="cards__title">Благовещенск</h2>
+            <button type="button" aria-label="Понравилось" class="cards__btn-like"></button>
           </div>
         </article>
-        <article class="grid-places__cards">
+        <article class="grid-places__cards cards">
           <img src="./images/grid-places__nizhni-novgorod.jpg"
             alt="Строящийся новый дом на откосе Нижнего Новгорода, во время знаменитого Нижегородского заката. Фотография."
-            class="grid-places__image">
-          <div class="grid-places__wrapper">
-            <h2 class="grid-places__title">Нижний Новгород</h2>
-            <button type="button" aria-label="Понравилось" class="grid-places__btn-like"></button>
+            class="cards__image">
+          <div class="cards__wrapper">
+            <h2 class="cards__title">Нижний Новгород</h2>
+            <button type="button" aria-label="Понравилось" class="cards__btn-like"></button>
           </div>
         </article>
-        <article class="grid-places__cards">
+        <article class="grid-places__cards cards">
           <img src="./images/grid-places__suzdal.jpg"
-            alt="Частный дом с огромной антенной в городе Суздале. Фотография." class="grid-places__image">
-          <div class="grid-places__wrapper">
-            <h2 class="grid-places__title">Суздаль</h2>
-            <button type="button" aria-label="Понравилось" class="grid-places__btn-like"></button>
+            alt="Частный дом с огромной антенной в городе Суздале. Фотография." class="cards__image">
+          <div class="cards__wrapper">
+            <h2 class="cards__title">Суздаль</h2>
+            <button type="button" aria-label="Понравилось" class="cards__btn-like"></button>
           </div>
         </article>
-        <article class="grid-places__cards">
+        <article class="grid-places__cards cards">
           <img src="./images/grid-places__donguz-orun.jpg"
-            alt="Ледник Семерка - восточный склон горы Донгуз-Орун. Фотография." class="grid-places__image">
-          <div class="grid-places__wrapper">
-            <h2 class="grid-places__title">Донгуз-Орун</h2>
-            <button type="button" aria-label="Понравилось" class="grid-places__btn-like"></button>
+            alt="Ледник Семерка - восточный склон горы Донгуз-Орун. Фотография." class="cards__image">
+          <div class="cards__wrapper">
+            <h2 class="cards__title">Донгуз-Орун</h2>
+            <button type="button" aria-label="Понравилось" class="cards__btn-like"></button>
           </div>
         </article>
       </section>
@@ -92,8 +93,8 @@
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" name="popupForm" method="post">
-          <input id="name" type="text" name="inputName" class="popup__name popup__input">
-          <input id="mission" type="text" name="inputMission" class="popup__mission popup__input">
+          <input id="name" type="text" name="inputName" placeholder="Имя" class="popup__input" required>
+          <input id="mission" type="text" name="inputMission" placeholder="О себе" class="popup__input" required>
           <button type="submit" aria-label="Сохранить изменения в профиле" class="popup__submit">Сохранить</button>
         </form>
         <button type="button" aria-label="Закрыть окно редактирования" class="popup__close links"></button>

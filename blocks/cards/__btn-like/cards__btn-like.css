@@ -1,4 +1,4 @@
-.grid-places__btn-like {
+.cards__btn-like {
   display: block;
 
   width: 22px;
@@ -12,7 +12,7 @@
   cursor: pointer;
 }
 
-.grid-places__btn-like:hover {
+.cards__btn-like:hover {
   transition: 0.5s;
   opacity: 0.5;
 }

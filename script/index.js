@@ -10,39 +10,29 @@ const inputMission = document.querySelector('#mission');
 
 const formSubmit = document.querySelector('.popup__form');
 
+
+let toggleOpenPopup = () => {
+  popUp.classList.toggle('popup_opened');
+}
+
 function clickEdit() {
-  inputName.placeholder = `${profileName.textContent}`;
-  inputMission.placeholder = `${profileMission.textContent}`;
-  popUp.classList.add('popup_opened');
+  inputName.value = `${profileName.textContent}`;
+  inputMission.value = `${profileMission.textContent}`;
+  toggleOpenPopup();
 }
 
 function clickClose() {
-  // обнуляем плейсхолдеры
-  inputName.value = "";
-  inputMission.value = "";
-
-  popUp.classList.remove('popup_opened');
+  toggleOpenPopup();
 }
 
 function clickSubmit(evt) {
   evt.preventDefault();
 
+  profileName.textContent = `${inputName.value}`;
+  profileMission.textContent = `${inputMission.value}`;
 
-  // конструкции которые не дают записать пустой заголовок
-  // и миссию, если инпуты пустые и нажать СОХРАНИТЬ
-
-  if (inputName.value != "") {
-    profileName.textContent = `${inputName.value}`;
-  } else {
-    profileName.textContent = `${inputName.placeholder}`;
-  };
-
-  if (inputMission.value != "") {
-    profileMission.textContent = `${inputMission.value}`;
-  } else {
-    profileMission.textContent = `${inputMission.placeholder}`;
-  };
-}
+  toggleOpenPopup();
+};
 
 formSubmit.addEventListener('submit', clickSubmit);
 buttonEdit.addEventListener('click', clickEdit);
