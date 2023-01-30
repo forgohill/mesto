@@ -26,11 +26,15 @@
 /* ======================= GRID-PLACES =============================== */
 @import url(../blocks/grid-places/grid-places.css);
 @import url(../blocks/grid-places/__cards/grid-places__cards.css);
-@import url(../blocks/grid-places/__image/grid-places__image.css);
-@import url(../blocks/grid-places/__wrapper/grid-places__wrapper.css);
-@import url(../blocks/grid-places/__title/grid-places__title.css);
-@import url(../blocks/grid-places/__btn-like/grid-places__btn-like.css);
-@import url(../blocks/grid-places/__btn-like/_active/grid-places__btn-like_active.css);
+
+/* ======================= CARDS =============================== */
+
+@import url(../blocks/cards/cards.css);
+@import url(../blocks/cards/__image/cards__image.css);
+@import url(../blocks/cards/__wrapper/cards__wrapper.css);
+@import url(../blocks/cards/__title/cards__title.css);
+@import url(../blocks/cards/__btn-like/cards__btn-like.css);
+@import url(../blocks/cards/__btn-like/_active/cards__btn-like_active.css);
 
 /* ======================= FOOTER =============================== */
 @import url(../blocks/footer/footer.css);
