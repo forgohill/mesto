@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: flex-start;
 
+  position: relative;
 
   max-width: 282px;
   max-height: 361px;

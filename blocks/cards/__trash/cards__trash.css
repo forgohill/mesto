@@ -1,0 +1,17 @@
+.cards__trash {
+  display: block;
+  position: absolute;
+
+  top: 20px;
+  right: 20px;
+
+  width: 18px;
+  height: 19px;
+
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: url(../../../images/__basket.svg) center / 100% no-repeat transparent;
+  cursor: pointer;
+}
