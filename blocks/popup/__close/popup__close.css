@@ -10,8 +10,7 @@
   padding: 0;
   border: 0;
   outline: none;
-  background-color: transparent;
-  background: url(../../../images/popup__close.svg) 0 0 / 100% no-repeat;
+  background: url(../../../images/popup__close.svg) 0 0 / 100% no-repeat transparent;
   cursor: pointer;
 }
 
