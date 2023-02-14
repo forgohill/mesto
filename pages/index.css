@@ -28,7 +28,6 @@
 @import url(../blocks/grid-places/__cards/grid-places__cards.css);
 
 /* ======================= CARDS =============================== */
-
 @import url(../blocks/cards/cards.css);
 @import url(../blocks/cards/__image/cards__image.css);
 @import url(../blocks/cards/__wrapper/cards__wrapper.css);
