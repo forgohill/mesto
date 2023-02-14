@@ -21,10 +21,6 @@ function clickEdit() {
   toggleOpenPopup();
 }
 
-function clickClose() {
-  toggleOpenPopup();
-}
-
 function clickSubmit(evt) {
   evt.preventDefault();
 
@@ -36,5 +32,5 @@ function clickSubmit(evt) {
 
 formSubmit.addEventListener('submit', clickSubmit);
 buttonEdit.addEventListener('click', clickEdit);
-buttonClose.addEventListener('click', clickClose);
+buttonClose.addEventListener('click', toggleOpenPopup);
 
