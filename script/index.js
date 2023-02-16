@@ -87,7 +87,11 @@ const inputFoto = document.querySelector('.popup__input_name');
 const inputLink = document.querySelector('.popup__input_mission');
 
 //  ==== КОНСТАНТЫ ДЛЯ ПОПАП КАРТИНКИ
+const buttonPreview = document.querySelectorAll('.cards__image');
+// console.log(buttonPreview);
 const popUpPreview = document.querySelector('.popup_preview');
+const popUpImage = document.querySelector('.popup__image');
+const popUpFigcaption = document.querySelector('.popup__figcaption');
 
 //  ==== КНОПКИ ЗАКРЫТЬ
 const buttonClose = document.querySelectorAll('.popup__close');
@@ -105,7 +109,7 @@ let closePopup = (evt) => {
 
 //  ==== ФУНКЦИЯ ОТКРЫТИЯ
 let openPopup = (popup) => {
-  console.log(popup);
+  // console.log(popup);
   popup.classList.add('popup_opened');
 };
 
@@ -116,9 +120,15 @@ let clickEdit = () => {
   openPopup(popUpEdit);
 }
 
-// let openPreview = () => {
-
-// }
+let openPreview = (sourcePreview, namePreview) => {
+  // console.log(sourcePreview);
+  // console.log(namePreview);
+  // console.log(popUpImage);
+  // console.log(popUpFigcaption);
+  popUpImage.src = sourcePreview;
+  popUpFigcaption.textContent = namePreview;
+  openPopup(popUpPreview);
+}
 
 function clickSubmit(evt) {
   evt.preventDefault();
@@ -140,7 +150,19 @@ buttonAdd.addEventListener('click', () => {
 // ===== СЛУШАЕМ ЗАКРЫТИЕ
 buttonClose.forEach(function (item) {
   item.addEventListener('click', (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     closePopup(e);
+  })
+});
+buttonPreview.forEach(function (item) {
+  item.addEventListener('click', () => {
+    const namePreview = item.parentNode.querySelector('.cards__title').textContent;
+    const sourcePreview = item.src;
+    // console.log(sorcePreview);
+    // console.log(namePreview);
+    // e.preventDefault()
+    // console.log(item.src);
+    // console.log(item.parentNode);
+    openPreview(sourcePreview, namePreview);
   })
 });
