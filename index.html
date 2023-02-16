@@ -24,10 +24,11 @@
           <div class="profile__wrapper">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <p class="profile__mission">Исследователь океана</p>
-            <button type="button" aria-label="Редактировать профиль" class="profile__btn-edit links"></button>
+            <button type="button" name="button-edit" aria-label="Редактировать профиль"
+              class="profile__btn-edit links"></button>
           </div>
         </div>
-        <button type="button" aria-label="Добавить картинку" class="profile__btn-add links"></button>
+        <button type="button" name="button-add" aria-label="Добавить картинку" class="profile__btn-add links"></button>
       </section>
 
       <section class="grid-places">
@@ -38,18 +39,52 @@
       <p class="footer__paragraph">&#169; 2023 Mesto Russia</p>
     </footer>
 
-    <div class="popup">
+    <!-- ДОБАВИТЬ ПРЕВЬЮ -->
+
+    <div class="popup popup_preview">
+      <figure class="popup__figure">
+        <img src="./images/grid-places__nizhni-novgorod_L.jpg" alt="Место" class="popup__image">
+        <figcaption class="popup__figcaption">Пицунда</figcaption>
+        <button type="button" name="button-close" aria-label="Закрыть окно"
+          class="popup__close popup__close_edit links"></button>
+      </figure>
+
+    </div>
+
+    <!-- РЕДАКТИРОВАТЬ -->
+    <div class="popup popup_edit">
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" name="popupForm" method="post">
-          <input id="name" type="text" name="inputName" placeholder="Имя" class="popup__input" required>
-          <input id="mission" type="text" name="inputMission" placeholder="О себе" class="popup__input" required>
+          <input type="text" name="inputName" placeholder="Имя" class="popup__input popup__input_name" required>
+          <input type="text" name="inputMission" placeholder="О себе" class="popup__input popup__input_mission"
+            required>
           <button type="submit" aria-label="Сохранить изменения в профиле" class="popup__submit">Сохранить</button>
         </form>
-        <button type="button" aria-label="Закрыть окно редактирования" class="popup__close links"></button>
+        <button type="button" name="button-close" aria-label="Закрыть окно"
+          class="popup__close popup__close_edit links"></button>
+      </div>
+    </div>
+
+
+
+    <!-- ДОБАВИТЬ КАРТОЧКУ -->
+    <div class="popup popup_add">
+      <div class="popup__container">
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form" name="popupForm" method="post">
+          <input id="foto" type="text" name="inputFoto" placeholder="Название" class="popup__input popup__input_foto"
+            required>
+          <input id="link" type="text" name="inputLink" placeholder="Ссылка на картинку"
+            class="popup__input popup__input_link" required>
+          <button type="submit" aria-label="Добавить карточку с картинкой" class="popup__submit">Создать</button>
+        </form>
+        <button type="button" name="button-close" aria-label="Закрыть окно"
+          class="popup__close popup__close_add links"></button>
       </div>
     </div>
   </div>
+
 
   <template id="template">
     <article class="grid-places__cards cards">

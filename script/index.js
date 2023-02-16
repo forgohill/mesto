@@ -24,10 +24,13 @@ const initialCards = [
     link: './images/grid-places__donguz-orun.jpg'
   }
 ];
+
+
+
 const sectionCardsWrapper = document.querySelector('.grid-places');
-const buttonAdd = document.querySelector('.profile__btn-add');
 const template = document.querySelector('#template');
 
+// ===== СОЗДАНИЕ КАРТОЧКИ
 const getCardsItems = (item) => {
   const newItemElement = template.content.cloneNode(true);
   const newItemTitle = newItemElement.querySelector('.cards__title')
@@ -37,13 +40,15 @@ const getCardsItems = (item) => {
   return newItemElement;
 };
 
+// ===== РЕНДЕР КАРТОЧЕК
 const renderCards = (wrap, item) => {
   wrap.append(getCardsItems(item));
 };
 
+// ===== ИНИЦИАЦИЯ КАРТОЧЕК
 initialCards.forEach((item) => {
-  console.log(item.name);
-  console.log(item.link);
+  // console.log(item.name);
+  // console.log(item.link);
   renderCards(sectionCardsWrapper, item);
 });
 
@@ -62,28 +67,58 @@ initialCards.forEach((item) => {
  * </template>
  * */
 
+
+//  ==== КОНСТАНТЫ ДЛЯ РЕДАКТИРОВАНИЯ ПРОФИЛЯ
 const buttonEdit = document.querySelector('.profile__btn-edit');
-const popUp = document.querySelector('.popup');
-const buttonClose = document.querySelector('.popup__close');
+const popUpEdit = document.querySelector('.popup_edit');
+// console.log(popUpEdit.classList);
 
 const profileName = document.querySelector('.profile__name');
 const profileMission = document.querySelector('.profile__mission');
 
-const inputName = document.querySelector('#name');
-const inputMission = document.querySelector('#mission');
+const inputName = document.querySelector('.popup__input_name');
+const inputMission = document.querySelector('.popup__input_mission');
 
+//  ==== КОНСТАНТЫ ДЛЯ ДОБАВЛЕНИЯ КАРТОЧКИ
+const buttonAdd = document.querySelector('.profile__btn-add');
+const popUpAdd = document.querySelector('.popup_add');
+// console.log(popUpAdd.classList);
+const inputFoto = document.querySelector('.popup__input_name');
+const inputLink = document.querySelector('.popup__input_mission');
+
+//  ==== КОНСТАНТЫ ДЛЯ ПОПАП КАРТИНКИ
+const popUpPreview = document.querySelector('.popup_preview');
+
+//  ==== КНОПКИ ЗАКРЫТЬ
+const buttonClose = document.querySelectorAll('.popup__close');
+
+//  ==== ФОРМА ОТПРАВИТЬ
 const formSubmit = document.querySelector('.popup__form');
 
 
-let toggleOpenPopup = () => {
-  popUp.classList.toggle('popup_opened');
+//  ==== ФУНКЦИЯ ЗАКРЫТИЯ
+let closePopup = (evt) => {
+  console.log('ворк клозет');
+  // console.log(evt.target.closest('.popup_opened'));
+  evt.target.closest('.popup_opened').classList.toggle('popup_opened');
 }
 
-function clickEdit() {
+//  ==== ФУНКЦИЯ ОТКРЫТИЯ
+let openPopup = (popup) => {
+  console.log(popup);
+  popup.classList.add('popup_opened');
+};
+
+let clickEdit = () => {
+  // console.log(evt);
   inputName.value = `${profileName.textContent}`;
   inputMission.value = `${profileMission.textContent}`;
-  toggleOpenPopup();
+  openPopup(popUpEdit);
 }
+
+// let openPreview = () => {
+
+// }
 
 function clickSubmit(evt) {
   evt.preventDefault();
@@ -91,10 +126,21 @@ function clickSubmit(evt) {
   profileName.textContent = `${inputName.value}`;
   profileMission.textContent = `${inputMission.value}`;
 
-  toggleOpenPopup();
+  closePopup(evt);
 };
 
+// ===== СЛУШАЕМ ОТРАВКУ ФОРМ
 formSubmit.addEventListener('submit', clickSubmit);
+// ===== СЛУШАЕМ РЕДАКТИРОВАНИЕ
 buttonEdit.addEventListener('click', clickEdit);
-buttonClose.addEventListener('click', toggleOpenPopup);
-
+// ===== СЛУШАЕМ ДОБАВЛЕНИЕ
+buttonAdd.addEventListener('click', () => {
+  openPopup(popUpAdd);
+});
+// ===== СЛУШАЕМ ЗАКРЫТИЕ
+buttonClose.forEach(function (item) {
+  item.addEventListener('click', (e) => {
+    e.preventDefault()
+    closePopup(e);
+  })
+});
