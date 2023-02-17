@@ -37,14 +37,17 @@ const getCardsItems = (item) => {
   const newItemImage = newItemElement.querySelector('.cards__image')
   newItemTitle.textContent = item.name;
   newItemImage.src = item.link;
+
   return newItemElement;
 };
-
+// console.log(newItemElement);
 // ===== РЕНДЕР КАРТОЧЕК
 const renderCards = (wrap, item) => {
   wrap.append(getCardsItems(item));
 };
-
+const addNewCards = (wrap, item) => {
+  wrap.prepend(getCardsItems(item));
+};
 // ===== ИНИЦИАЦИЯ КАРТОЧЕК
 initialCards.forEach((item) => {
   // console.log(item.name);
@@ -83,8 +86,15 @@ const inputMission = document.querySelector('.popup__input_mission');
 const buttonAdd = document.querySelector('.profile__btn-add');
 const popUpAdd = document.querySelector('.popup_add');
 // console.log(popUpAdd.classList);
-const inputFoto = document.querySelector('.popup__input_name');
-const inputLink = document.querySelector('.popup__input_mission');
+
+const inputFoto = document.querySelector('.popup__input_foto');
+const inputLink = document.querySelector('.popup__input_link');
+
+//КНОПКА МУСОРКА
+const buttonTrash = document.querySelectorAll('.cards__trash')
+
+
+
 
 //  ==== КОНСТАНТЫ ДЛЯ ПОПАП КАРТИНКИ
 const buttonPreview = document.querySelectorAll('.cards__image');
@@ -96,8 +106,10 @@ const popUpFigcaption = document.querySelector('.popup__figcaption');
 //  ==== КНОПКИ ЗАКРЫТЬ
 const buttonClose = document.querySelectorAll('.popup__close');
 
-//  ==== ФОРМА ОТПРАВИТЬ
-const formSubmit = document.querySelector('.popup__form');
+//  ==== ФОРМА ПРОФИЛЬ
+const formSubmitEdit = document.querySelector('.popup__form_edit');
+//  ==== ФОРМА ДОБАВИТЬ
+const formCreate = document.querySelector('.popup__form_add');
 
 
 //  ==== ФУНКЦИЯ ЗАКРЫТИЯ
@@ -113,6 +125,7 @@ let openPopup = (popup) => {
   popup.classList.add('popup_opened');
 };
 
+//  ==== ФУНКЦИЯ РЕДАКТИРОВАНИЯ ПРОФИЛЯ
 let clickEdit = () => {
   // console.log(evt);
   inputName.value = `${profileName.textContent}`;
@@ -120,6 +133,7 @@ let clickEdit = () => {
   openPopup(popUpEdit);
 }
 
+//  ==== ФУНКЦИЯ ЗАПИСИ НАЗВАНИЯ И ССЫЛКИ В ОТРЫВАЕМОЕ ПРИВЬЮ
 let openPreview = (sourcePreview, namePreview) => {
   // console.log(sourcePreview);
   // console.log(namePreview);
@@ -130,6 +144,7 @@ let openPreview = (sourcePreview, namePreview) => {
   openPopup(popUpPreview);
 }
 
+//  ==== ФУНКЦИЯ РЕДАКТИРОВАНИЯ ПРОФИЛЯ ИЗМЕНЕНИЯ ПРОФИЛЯ И ПРОФФЕССИИ
 function clickSubmit(evt) {
   evt.preventDefault();
 
@@ -139,21 +154,25 @@ function clickSubmit(evt) {
   closePopup(evt);
 };
 
-// ===== СЛУШАЕМ ОТРАВКУ ФОРМ
-formSubmit.addEventListener('submit', clickSubmit);
+// ===== СЛУШАЕМ ОТРАВКУ ФОРМА ПРОФИЛЯ
+formSubmitEdit.addEventListener('submit', clickSubmit);
+// ===== СЛУШАЕМ ОТРАВКУ ФОРМА ДОБАВИТЬ
+
 // ===== СЛУШАЕМ РЕДАКТИРОВАНИЕ
 buttonEdit.addEventListener('click', clickEdit);
 // ===== СЛУШАЕМ ДОБАВЛЕНИЕ
 buttonAdd.addEventListener('click', () => {
   openPopup(popUpAdd);
 });
-// ===== СЛУШАЕМ ЗАКРЫТИЕ
+// ===== СЛУШАЕМ ЗАКРЫТИЕ ПОПАПОВ
 buttonClose.forEach(function (item) {
   item.addEventListener('click', (e) => {
     // e.preventDefault()
     closePopup(e);
   })
 });
+
+// ===== СЛУШАЕМ ОТКРЫТИЕ  ПРИВЬЮ
 buttonPreview.forEach(function (item) {
   item.addEventListener('click', () => {
     const namePreview = item.parentNode.querySelector('.cards__title').textContent;
@@ -166,3 +185,26 @@ buttonPreview.forEach(function (item) {
     openPreview(sourcePreview, namePreview);
   })
 });
+// ===== СЛУШАЕМ КНОПКУ КАРЗИНУ ВНУТРИ ФУНКЦИЯ ЗАКРЫТЬ
+buttonTrash.forEach(function (item) {
+  item.addEventListener('click', (evt) => {
+    // console.log(evt.target.closest('.cards'));
+    // console.log(item.parentNode);
+    evt.target.closest('.cards').remove();
+  })
+});
+
+
+let clickCreate = (evt) => {
+  evt.preventDefault();
+  let item = {};
+  item.name = `${inputFoto.value}`;
+  item.link = `${inputLink.value}`;
+  // console.log('evt.target');
+  console.log('клик');
+  console.log(item);
+  addNewCards(sectionCardsWrapper, item);
+  // closePopup(evt);
+}
+
+formCreate.addEventListener('submit', clickCreate);
