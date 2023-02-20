@@ -1,9 +1,11 @@
 .popup {
   max-width: 100%;
-
   position: fixed;
 
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+
+  display: flex;
 
   flex-direction: column;
   justify-content: center;
@@ -15,4 +17,6 @@
   height: 100%;
 
   background-color: rgba(0, 0, 0, 0.5);
+
+  transition: visibility 0s, opacity 0.5s linear;
 }
