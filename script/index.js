@@ -60,26 +60,28 @@ const template = document.querySelector('#template');
 // ================= БЛОК ФУКНЦИЙ ОБРАБОТЧИКОВ=======================
 // =================
 
-let closePopup = (evt) => {
-  evt.target.closest('.popup_opened').classList.toggle('popup_opened');
+
+const closePopup = (evt) => {
+  const openedPopup = evt.target.closest('.popup_opened');
+  if (openedPopup)
+    evt.target.closest('.popup_opened').classList.remove('popup_opened');
 }
 
-let openPopup = (popup) => {
+
+const openPopup = (popup) => {
   popup.classList.add('popup_opened');
 };
 
-let clickEdit = () => {
+const clickEdit = () => {
   inputName.value = `${profileName.textContent}`;
   inputMission.value = `${profileMission.textContent}`;
   openPopup(popUpEdit);
 }
-let clickAdd = () => {
-  inputFoto.value = '';
-  inputLink.value = '';
+const clickAdd = () => {
   openPopup(popUpAdd);
 }
 
-let clickSubmit = (evt) => {
+const clickSubmit = (evt) => {
   evt.preventDefault();
 
   profileName.textContent = `${inputName.value}`;
@@ -87,17 +89,18 @@ let clickSubmit = (evt) => {
   closePopup(evt);
 };
 
-let openPreview = (evt) => {
+const openPreview = (evt) => {
   popUpImage.src = evt.target.src;
+  popUpImage.alt = evt.target.alt;
   popUpFigcaption.textContent = evt.target.closest('.cards').querySelector('.cards__title').textContent;
   openPopup(popUpPreview);
 }
 
-let handlerLike = (evt) => {
+const handlerLike = (evt) => {
   evt.target.classList.toggle('cards__btn-like_active');
 };
 
-let handlerTrash = (evt) => {
+const handlerTrash = (evt) => {
   evt.target.closest('.cards').remove();
 };
 
@@ -109,12 +112,14 @@ const addNewCards = (wrap, item) => {
   wrap.prepend(getCardsItems(item));
 };
 
-let clickCreate = (evt) => {
+const clickCreate = (evt) => {
   evt.preventDefault();
-  let item = {};
+
+  const item = {};
   item.name = `${inputFoto.value}`;
   item.link = `${inputLink.value}`;
   addNewCards(sectionCardsWrapper, item);
+  evt.target.reset();
   closePopup(evt);
 }
 
@@ -124,7 +129,7 @@ const getCardsItems = (item) => {
   const newItemImage = newItemElement.querySelector('.cards__image')
   newItemTitle.textContent = item.name;
   newItemImage.src = item.link;
-
+  newItemImage.alt = item.name;
   const buttonLike = newItemElement.querySelector('.cards__btn-like');
   const buttonTrash = newItemElement.querySelector('.cards__trash')
   const buttonPreview = newItemElement.querySelector('.cards__image');
