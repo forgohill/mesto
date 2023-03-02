@@ -55,11 +55,51 @@
     <div class="popup popup_edit">
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form popup__form_edit" name="popupForm" method="post">
-          <input type="text" name="inputName" placeholder="Имя" class="popup__input popup__input_name" required>
-          <input type="text" name="inputMission" placeholder="О себе" class="popup__input popup__input_mission"
-            required>
-          <button type="submit" aria-label="Сохранить изменения в профиле" class="popup__submit">Сохранить</button>
+
+        <form
+        class="popup__form popup__form_edit"
+        name="popupForm"
+        method="post">
+
+          <input
+          id="name"
+
+          type="text"
+          minlength="2"
+          maxlength="40"
+
+          name="inputName"
+          placeholder="Имя"
+          class="popup__input popup__input_name"
+          required>
+
+          <span class="popup__error popup__error_name">
+
+          </span>
+
+          <input
+          id="mission"
+
+          type="text"
+          minlength="2"
+          maxlength="200"
+
+          name="inputMission"
+          placeholder="О себе"
+          class="popup__input popup__input_mission"
+          required>
+
+          <span class="popup__error popup__error_mission">
+
+          </span>
+
+          <button
+          type="submit"
+          aria-label="Сохранить изменения в профиле"
+          class="popup__submit">
+            Сохранить
+          </button>
+
         </form>
         <button type="button" name="button-close" aria-label="Закрыть окно"
           class="popup__close popup__close_edit links"></button>
@@ -72,13 +112,51 @@
     <div class="popup popup_add">
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form popup__form_add" name="popupForm" method="post">
-          <input id="foto" type="text" name="inputFoto" placeholder="Название" class="popup__input popup__input_foto"
-            required>
-          <input id="link" type="text" name="inputLink" placeholder="Ссылка на картинку"
-            class="popup__input popup__input_link" required>
-          <button type="submit" aria-label="Добавить карточку с картинкой" class="popup__submit">Создать</button>
+
+        <form
+        class="popup__form popup__form_add"
+        name="popupForm"
+        method="post">
+
+          <input
+          id="foto"
+
+          type="text"
+          minlength="2"
+          maxlength="30"
+
+          name="inputFoto"
+          placeholder="Название"
+          class="popup__input popup__input_foto"
+          required>
+
+          <span class="popup__error popup__error_foto">
+
+          </span>
+
+          <input
+          id="link"
+
+          type="url"
+
+          name="inputLink"
+          placeholder="Ссылка на картинку"
+          class="popup__input popup__input_link"
+          required>
+
+          <span class="popup__error popup__error_link">
+
+          </span>
+
+          <button
+          type="submit"
+          aria-label="Добавить карточку с картинкой"
+          class="popup__submit">
+            Создать
+          </button>
+
         </form>
+
         <button type="button" name="button-close" aria-label="Закрыть окно"
           class="popup__close popup__close_add links"></button>
       </div>
