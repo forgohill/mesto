@@ -1,0 +1,15 @@
+.popup__submit_disabled {
+  border: 1px solid #000000;
+  color: #000;
+  background-color: #FFF;
+  opacity: 0.1;
+  cursor: auto;
+}
+
+.popup__submit_disabled:hover {
+  border: 1px solid #000000;
+  color: #000;
+  background-color: #FFF;
+  opacity: 0.1;
+  cursor: auto;
+}

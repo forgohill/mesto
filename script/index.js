@@ -63,12 +63,14 @@ const template = document.querySelector('#template');
 
 const closePopup = (evt) => {
   const openedPopup = evt.target.closest('.popup_opened');
+
   if (openedPopup)
     evt.target.closest('.popup_opened').classList.remove('popup_opened');
 }
 
 
 const openPopup = (popup) => {
+  enableValidation(formValidationConfig);
   popup.classList.add('popup_opened');
 };
 
