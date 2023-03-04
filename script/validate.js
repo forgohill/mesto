@@ -35,7 +35,7 @@ const setEventListeners = (formElement, config) => {
   toggleButton(formElement, formValidationConfig);
 
   const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
-
+  hideErrorForInput(inputList, formValidationConfig);
   // перебираем список с помощью форич
   // и навешиваем слушатель события 'input'
   inputList.forEach((inputElement) => {
@@ -45,6 +45,14 @@ const setEventListeners = (formElement, config) => {
     });
   });
 }
+
+const hideErrorForInput = (inputList, config) => {
+  inputList.forEach((inputElement) => {
+    const formElement = inputElement.closest(config.formSelector);
+    hideInputError(formElement, inputElement, formValidationConfig);
+  });
+}
+
 
 // функция добавления сообщения об ошибке
 const showInputError = (formElement, inputElement, errorMessage, config) => {
@@ -63,12 +71,8 @@ const hideInputError = (formElement, inputElement, config) => {
 // функция проверки на валидность инпута
 const isValid = (formElement, inputElement) => {
   if (!inputElement.validity.valid) {
-    // отправляем в функцию елемент слуашемого инпута
-    // и стандартное сообщение браузера об ошибке
     showInputError(formElement, inputElement, inputElement.validationMessage, formValidationConfig);
-
   } else {
-     // отправляем в функцию елемент слуашемого инпута
     hideInputError(formElement, inputElement, formValidationConfig);
   }
 }
@@ -82,4 +86,3 @@ function toggleButton(formElement, config) {
   buttonSubmit.classList.toggle(config.inactiveButtonClass, !isFormValid);
 }
 
-// enableValidation(formValidationConfig);
