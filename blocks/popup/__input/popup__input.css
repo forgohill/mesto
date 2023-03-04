@@ -22,5 +22,5 @@
 
 
 .popup__input:focus {
-  border: 1px solid skyblue;
+  border-bottom: 1px solid skyblue;
 }
