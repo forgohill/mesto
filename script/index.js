@@ -29,6 +29,8 @@ const formCreate = document.querySelector('.popup__form_add');
 const sectionCardsWrapper = document.querySelector('.grid-places');
 const template = document.querySelector('#template');
 
+const bodyPopup = document.querySelectorAll('.popup');
+
 // =================
 // ================= БЛОК ФУКНЦИЙ ОБРАБОТЧИКОВ=======================
 // =================
@@ -132,4 +134,10 @@ buttonsClose.forEach(function (item) {
     closePopup(e);
   })
 });
-
+bodyPopup.forEach( function (item) {
+  item.addEventListener('click', (e) => {
+  if (e.target.classList.contains('popup_opened')) {
+  closePopup(e);
+  }
+  });
+})
