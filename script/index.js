@@ -35,8 +35,17 @@ const bodyPopup = document.querySelectorAll('.popup');
 // ================= БЛОК ФУКНЦИЙ ОБРАБОТЧИКОВ=======================
 // =================
 
+const toggleKeydownEsc = (evt) => {
+  if (evt.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
+    popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', toggleKeydownEsc);
+  }
+};
 
 const closePopup = (evt) => {
+
+  document.removeEventListener('keydown', toggleKeydownEsc);
   const openedPopup = evt.target.closest('.popup_opened');
 
   if (openedPopup)
@@ -44,6 +53,7 @@ const closePopup = (evt) => {
 }
 
 const openPopup = (popup) => {
+  document.addEventListener('keydown', toggleKeydownEsc)
   enableValidation(formValidationConfig);
   popup.classList.add('popup_opened');
 };
@@ -59,7 +69,6 @@ const clickAdd = () => {
 
 const clickSubmit = (evt) => {
   evt.preventDefault();
-
   profileName.textContent = `${inputName.value}`;
   profileMission.textContent = `${inputMission.value}`;
   closePopup(evt);
@@ -99,6 +108,7 @@ const clickCreate = (evt) => {
   closePopup(evt);
 }
 
+
 const getCardsItems = (item) => {
   const newItemElement = template.content.cloneNode(true);
   const newItemTitle = newItemElement.querySelector('.cards__title')
@@ -134,10 +144,10 @@ buttonsClose.forEach(function (item) {
     closePopup(e);
   })
 });
-bodyPopup.forEach( function (item) {
+bodyPopup.forEach(function (item) {
   item.addEventListener('click', (e) => {
-  if (e.target.classList.contains('popup_opened')) {
-  closePopup(e);
-  }
+    if (e.target.classList.contains('popup')) {
+      closePopup(e);
+    }
   });
 })
