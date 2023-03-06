@@ -36,15 +36,16 @@ const bodysPopup = document.querySelectorAll('.popup');
 // =================
 
 
-const closePopup = (popup) => {
-  popup.classList.remove('popup_opened');
+const closePopup = () => {
+  const openedPopup = document.querySelector('.popup_opened');
+  openedPopup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeByEscape);
 }
 
 const closeByEscape = (evt) => {
-  const openedPopup = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
-    closePopup(openedPopup);
+    console.log('press ESC');
+    closePopup();
   }
 };
 
@@ -137,17 +138,13 @@ buttonEdit.addEventListener('click', clickEdit);
 buttonAdd.addEventListener('click', clickAdd);
 
 buttonsClose.forEach(function (item) {
-  item.addEventListener('click', (e) => {
-    const openedPopup = e.target.closest('.popup_opened');
-    closePopup(openedPopup);
-  })
+  item.addEventListener('click', closePopup);
 });
 
 bodysPopup.forEach(function (item) {
   item.addEventListener('click', (e) => {
-    const openedPopup = e.target;
-    if (openedPopup.classList.contains('popup')) {
-      closePopup(openedPopup);
+    if (e.target.classList.contains('popup')) {
+      closePopup();
     }
   });
 })
