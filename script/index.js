@@ -29,33 +29,29 @@ const formCreate = document.querySelector('.popup__form_add');
 const sectionCardsWrapper = document.querySelector('.grid-places');
 const template = document.querySelector('#template');
 
-const bodyPopup = document.querySelectorAll('.popup');
+const bodysPopup = document.querySelectorAll('.popup');
 
 // =================
 // ================= БЛОК ФУКНЦИЙ ОБРАБОТЧИКОВ=======================
 // =================
 
-const toggleKeydownEsc = (evt) => {
+
+const closePopup = (popup) => {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeByEscape);
+}
+
+const closeByEscape = (evt) => {
+  const openedPopup = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
-    const popup = document.querySelector('.popup_opened');
-    popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', toggleKeydownEsc);
+    closePopup(openedPopup);
   }
 };
 
-const closePopup = (evt) => {
-
-  document.removeEventListener('keydown', toggleKeydownEsc);
-  const openedPopup = evt.target.closest('.popup_opened');
-
-  if (openedPopup)
-    evt.target.closest('.popup_opened').classList.remove('popup_opened');
-}
-
 const openPopup = (popup) => {
-  document.addEventListener('keydown', toggleKeydownEsc)
   enableValidation(formValidationConfig);
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closeByEscape);
 };
 
 const clickEdit = () => {
@@ -139,15 +135,19 @@ formSubmitEdit.addEventListener('submit', clickSubmit);
 formCreate.addEventListener('submit', clickCreate);
 buttonEdit.addEventListener('click', clickEdit);
 buttonAdd.addEventListener('click', clickAdd);
+
 buttonsClose.forEach(function (item) {
   item.addEventListener('click', (e) => {
-    closePopup(e);
+    const openedPopup = e.target.closest('.popup_opened');
+    closePopup(openedPopup);
   })
 });
-bodyPopup.forEach(function (item) {
+
+bodysPopup.forEach(function (item) {
   item.addEventListener('click', (e) => {
-    if (e.target.classList.contains('popup')) {
-      closePopup(e);
+    const openedPopup = e.target;
+    if (openedPopup.classList.contains('popup')) {
+      closePopup(openedPopup);
     }
   });
 })
