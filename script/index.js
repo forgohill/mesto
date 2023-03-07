@@ -142,19 +142,15 @@ buttonEdit.addEventListener('click', clickEdit);
 buttonAdd.addEventListener('click', clickAdd);
 
 buttonsClose.forEach(function (item) {
-
-  // console.log(openedPopup);
   item.addEventListener('click', (e) => {
-    const openedPopup = e.target.closest('.popup');
-    closePopup(openedPopup)
+    closePopup(e.target.closest('.popup'))
   });
 });
 
 bodysPopup.forEach(function (item) {
   item.addEventListener('click', (e) => {
     if (e.target.classList.contains('popup')) {
-      const openedPopup = document.querySelector('.popup_opened');
-      closePopup(openedPopup);
+      closePopup(e.target.closest('.popup'))
     }
   });
 })
