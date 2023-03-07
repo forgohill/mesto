@@ -39,18 +39,28 @@ const disableSubmit = (evt) => {
 
 const setEventListeners = (formElement, config) => {
   formElement.addEventListener('submit', disableSubmit);
-  toggleButton(formElement, config);
-
   const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
   inputList.forEach((inputElement) => {
     const formElement = inputElement.closest(config.formSelector);
-    hideInputError(formElement, inputElement, config);
     inputElement.addEventListener('input', () => {
       isValid(formElement, inputElement, config);
       toggleButton(formElement, config);
     });
   });
 }
+
+const resetInputError = (formElement, config) => {
+  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+  inputList.forEach((inputElement) => {
+    hideInputError(formElement, inputElement, config)
+  });
+};
+
+const resetValidation = (formElement, config) => {
+  resetInputError(formElement, config)
+  toggleButton(formElement, config)
+}
+
 
 const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
