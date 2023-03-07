@@ -36,16 +36,16 @@ const bodysPopup = document.querySelectorAll('.popup');
 
 
 
-const closePopup = () => {
-  const openedPopup = document.querySelector('.popup_opened');
-
-  openedPopup.classList.remove('popup_opened');
+const closePopup = (popup) => {
+  popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeByEscape);
 }
 
 const closeByEscape = (evt) => {
   if (evt.key === 'Escape') {
-    closePopup();
+    const openedPopup = document.querySelector('.popup_opened');
+
+    closePopup(openedPopup);
   }
 };
 
@@ -54,7 +54,7 @@ const openPopup = (popup) => {
   document.addEventListener('keydown', closeByEscape);
 };
 
-const clickEdit = () => {
+const clickEdit = (popup) => {
   inputName.value = `${profileName.textContent}`;
   inputMission.value = `${profileMission.textContent}`;
   resetValidation(formEdit, formValidationConfig);
@@ -62,8 +62,8 @@ const clickEdit = () => {
 }
 
 const clickAdd = () => {
-  resetValidation(formCreate, formValidationConfig);
   formCreate.reset();
+  resetValidation(formCreate, formValidationConfig);
   openPopup(popUpAdd);
 }
 
@@ -71,7 +71,7 @@ const clickSubmit = (evt) => {
   evt.preventDefault();
   profileName.textContent = `${inputName.value}`;
   profileMission.textContent = `${inputMission.value}`;
-  closePopup();
+  closePopup(popUpEdit);
 };
 
 const openPreview = (evt) => {
@@ -106,7 +106,7 @@ const clickCreate = (evt) => {
   addNewCards(sectionCardsWrapper, item);
   evt.target.reset();
 
-  closePopup();
+  closePopup(popUpAdd);
 }
 
 
@@ -142,13 +142,19 @@ buttonEdit.addEventListener('click', clickEdit);
 buttonAdd.addEventListener('click', clickAdd);
 
 buttonsClose.forEach(function (item) {
-  item.addEventListener('click', closePopup);
+
+  // console.log(openedPopup);
+  item.addEventListener('click', (e) => {
+    const openedPopup = e.target.closest('.popup');
+    closePopup(openedPopup)
+  });
 });
 
 bodysPopup.forEach(function (item) {
   item.addEventListener('click', (e) => {
     if (e.target.classList.contains('popup')) {
-      closePopup();
+      const openedPopup = document.querySelector('.popup_opened');
+      closePopup(openedPopup);
     }
   });
 })
