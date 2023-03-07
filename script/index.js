@@ -22,8 +22,7 @@ const popUpFigcaption = document.querySelector('.popup__figcaption');
 
 const buttonsClose = document.querySelectorAll('.popup__close');
 
-const formSubmitEdit = document.querySelector('.popup__form_edit');
-
+const formEdit = document.querySelector('.popup__form_edit');
 const formCreate = document.querySelector('.popup__form_add');
 
 const sectionCardsWrapper = document.querySelector('.grid-places');
@@ -36,21 +35,21 @@ const bodysPopup = document.querySelectorAll('.popup');
 // =================
 
 
+
 const closePopup = () => {
   const openedPopup = document.querySelector('.popup_opened');
+
   openedPopup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeByEscape);
 }
 
 const closeByEscape = (evt) => {
   if (evt.key === 'Escape') {
-    console.log('press ESC');
     closePopup();
   }
 };
 
 const openPopup = (popup) => {
-  enableValidation(formValidationConfig);
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeByEscape);
 };
@@ -58,9 +57,13 @@ const openPopup = (popup) => {
 const clickEdit = () => {
   inputName.value = `${profileName.textContent}`;
   inputMission.value = `${profileMission.textContent}`;
+  resetValidation(formEdit, formValidationConfig);
   openPopup(popUpEdit);
 }
+
 const clickAdd = () => {
+  resetValidation(formCreate, formValidationConfig);
+  formCreate.reset();
   openPopup(popUpAdd);
 }
 
@@ -68,7 +71,7 @@ const clickSubmit = (evt) => {
   evt.preventDefault();
   profileName.textContent = `${inputName.value}`;
   profileMission.textContent = `${inputMission.value}`;
-  closePopup(evt);
+  closePopup();
 };
 
 const openPreview = (evt) => {
@@ -102,7 +105,8 @@ const clickCreate = (evt) => {
   item.link = `${inputLink.value}`;
   addNewCards(sectionCardsWrapper, item);
   evt.target.reset();
-  closePopup(evt);
+
+  closePopup();
 }
 
 
@@ -132,7 +136,7 @@ initialCards.forEach((item) => {
 // ================= БЛОК СЛУШАТЕЛЕЙ СОБЫТИЙ =======================
 // =================
 
-formSubmitEdit.addEventListener('submit', clickSubmit);
+formEdit.addEventListener('submit', clickSubmit);
 formCreate.addEventListener('submit', clickCreate);
 buttonEdit.addEventListener('click', clickEdit);
 buttonAdd.addEventListener('click', clickAdd);
@@ -148,3 +152,5 @@ bodysPopup.forEach(function (item) {
     }
   });
 })
+
+enableValidation(formValidationConfig);
