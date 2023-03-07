@@ -22,48 +22,48 @@ const popUpFigcaption = document.querySelector('.popup__figcaption');
 
 const buttonsClose = document.querySelectorAll('.popup__close');
 
-const formSubmitEdit = document.querySelector('.popup__form_edit');
-
+const formEdit = document.querySelector('.popup__form_edit');
 const formCreate = document.querySelector('.popup__form_add');
 
 const sectionCardsWrapper = document.querySelector('.grid-places');
 const template = document.querySelector('#template');
 
-const bodyPopup = document.querySelectorAll('.popup');
+const bodysPopup = document.querySelectorAll('.popup');
 
 // =================
 // ================= БЛОК ФУКНЦИЙ ОБРАБОТЧИКОВ=======================
 // =================
 
-const toggleKeydownEsc = (evt) => {
+
+
+const closePopup = (popup) => {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeByEscape);
+}
+
+const closeByEscape = (evt) => {
   if (evt.key === 'Escape') {
-    const popup = document.querySelector('.popup_opened');
-    popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', toggleKeydownEsc);
+    const openedPopup = document.querySelector('.popup_opened');
+
+    closePopup(openedPopup);
   }
 };
 
-const closePopup = (evt) => {
-
-  document.removeEventListener('keydown', toggleKeydownEsc);
-  const openedPopup = evt.target.closest('.popup_opened');
-
-  if (openedPopup)
-    evt.target.closest('.popup_opened').classList.remove('popup_opened');
-}
-
 const openPopup = (popup) => {
-  document.addEventListener('keydown', toggleKeydownEsc)
-  enableValidation(formValidationConfig);
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closeByEscape);
 };
 
-const clickEdit = () => {
+const clickEdit = (popup) => {
   inputName.value = `${profileName.textContent}`;
   inputMission.value = `${profileMission.textContent}`;
+  resetValidation(formEdit, formValidationConfig);
   openPopup(popUpEdit);
 }
+
 const clickAdd = () => {
+  formCreate.reset();
+  resetValidation(formCreate, formValidationConfig);
   openPopup(popUpAdd);
 }
 
@@ -71,7 +71,7 @@ const clickSubmit = (evt) => {
   evt.preventDefault();
   profileName.textContent = `${inputName.value}`;
   profileMission.textContent = `${inputMission.value}`;
-  closePopup(evt);
+  closePopup(popUpEdit);
 };
 
 const openPreview = (evt) => {
@@ -105,7 +105,8 @@ const clickCreate = (evt) => {
   item.link = `${inputLink.value}`;
   addNewCards(sectionCardsWrapper, item);
   evt.target.reset();
-  closePopup(evt);
+
+  closePopup(popUpAdd);
 }
 
 
@@ -135,19 +136,27 @@ initialCards.forEach((item) => {
 // ================= БЛОК СЛУШАТЕЛЕЙ СОБЫТИЙ =======================
 // =================
 
-formSubmitEdit.addEventListener('submit', clickSubmit);
+formEdit.addEventListener('submit', clickSubmit);
 formCreate.addEventListener('submit', clickCreate);
 buttonEdit.addEventListener('click', clickEdit);
 buttonAdd.addEventListener('click', clickAdd);
+
 buttonsClose.forEach(function (item) {
+
+  // console.log(openedPopup);
   item.addEventListener('click', (e) => {
-    closePopup(e);
-  })
+    const openedPopup = e.target.closest('.popup');
+    closePopup(openedPopup)
+  });
 });
-bodyPopup.forEach(function (item) {
+
+bodysPopup.forEach(function (item) {
   item.addEventListener('click', (e) => {
     if (e.target.classList.contains('popup')) {
-      closePopup(e);
+      const openedPopup = document.querySelector('.popup_opened');
+      closePopup(openedPopup);
     }
   });
 })
+
+enableValidation(formValidationConfig);
