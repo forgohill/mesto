@@ -1,12 +1,14 @@
 import { initialCards } from "./cards.js";
-// import Card from "./Card.js";
+import { Card } from "./Card.js";
 // import FormValidator from "./FormValidator.js";
 import * as validate from "./validate.js";
 
 // =================
 // ================= БЛОК DOM ЕЛЕМЕНТОВ =======================
 // =================
-console.log(validate);
+// console.log(Card);
+// console.dir(Card);
+// console.log(validate);
 // поля профиля
 const profileName = document.querySelector('.profile__name');
 const profileMission = document.querySelector('.profile__mission');
@@ -70,13 +72,13 @@ const openPopup = (popup) => {
 const clickEdit = (popup) => {
   inputName.value = `${profileName.textContent}`;
   inputMission.value = `${profileMission.textContent}`;
-  resetValidation(formEdit, formValidationConfig);
+  // resetValidation(formEdit, formValidationConfig);
   openPopup(popUpEdit);
 }
 
 const clickAdd = () => {
   formCreate.reset();
-  resetValidation(formCreate, formValidationConfig);
+  // resetValidation(formCreate, formValidationConfig);
   openPopup(popUpAdd);
 }
 
@@ -94,21 +96,33 @@ const openPreview = (evt) => {
   openPopup(popUpPreview);
 }
 
-const handlerLike = (evt) => {
-  evt.target.classList.toggle('cards__btn-like_active');
+// const handlerLike = (evt) => {
+//   evt.target.classList.toggle('cards__btn-like_active');
+// };
+
+// const handlerTrash = (evt) => {
+//   evt.target.closest('.cards').remove();
+// };
+
+
+const renderCards = (item, template, wrap) => {
+  const elementCard = new Card(item, template, openPreview);
+  wrap.append(elementCard.returnCard());
 };
 
-const handlerTrash = (evt) => {
-  evt.target.closest('.cards').remove();
+
+const addNewCards = (item, template, wrap) => {
+  const elementCard = new Card(item, template, openPreview);
+  wrap.prepend(elementCard.returnCard());
 };
 
-const renderCards = (wrap, item) => {
-  wrap.append(getCardsItems(item));
-};
+// const renderCards = (wrap, item) => {
+//   wrap.append(getCardsItems(item));
+// };
 
-const addNewCards = (wrap, item) => {
-  wrap.prepend(getCardsItems(item));
-};
+// const addNewCards = (wrap, item) => {
+//   wrap.prepend(getCardsItems(item));
+// };
 
 const clickCreate = (evt) => {
   evt.preventDefault();
@@ -116,7 +130,7 @@ const clickCreate = (evt) => {
   const item = {};
   item.name = `${inputFoto.value}`;
   item.link = `${inputLink.value}`;
-  addNewCards(sectionCardsWrapper, item);
+  addNewCards(item, template, sectionCardsWrapper);
   evt.target.reset();
 
   closePopup(popUpAdd);
@@ -142,7 +156,7 @@ const getCardsItems = (item) => {
 };
 
 initialCards.forEach((item) => {
-  renderCards(sectionCardsWrapper, item);
+  renderCards(item, template, sectionCardsWrapper);
 });
 
 // =================
@@ -168,4 +182,4 @@ bodysPopup.forEach(function (item) {
   });
 })
 
-validate.enableValidation(validate.formValidationConfig);
+// validate.enableValidation(validate.formValidationConfig);
