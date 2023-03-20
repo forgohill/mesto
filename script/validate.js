@@ -1,4 +1,4 @@
-const formValidationConfig = {
+export const formValidationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__submit',
@@ -56,15 +56,17 @@ const resetInputError = (formElement, config) => {
   });
 };
 
-const resetValidation = (formElement, config) => {
+export const resetValidation = (formElement, config) => {
   resetInputError(formElement, config)
   toggleButton(formElement, config)
 }
 
 
-const enableValidation = (config) => {
+export const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach(formElement => {
     setEventListeners(formElement, config);
   });
 };
+
+// export default validate;

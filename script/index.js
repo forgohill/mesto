@@ -1,33 +1,46 @@
+import { initialCards } from "./cards.js";
+// import Card from "./Card.js";
+// import FormValidator from "./FormValidator.js";
+import * as validate from "./validate.js";
+
 // =================
 // ================= БЛОК DOM ЕЛЕМЕНТОВ =======================
 // =================
-
+console.log(validate);
+// поля профиля
 const profileName = document.querySelector('.profile__name');
 const profileMission = document.querySelector('.profile__mission');
 
+// селекторы для редактирования профиля
 const buttonEdit = document.querySelector('.profile__btn-edit');
 const popUpEdit = document.querySelector('.popup_edit');
 const inputName = document.querySelector('.popup__input_name');
 const inputMission = document.querySelector('.popup__input_mission');
 
-
+// селекторы добавления карточки
 const buttonAdd = document.querySelector('.profile__btn-add');
 const popUpAdd = document.querySelector('.popup_add');
 const inputFoto = document.querySelector('.popup__input_foto');
 const inputLink = document.querySelector('.popup__input_link');
 
+// селекторы для включения превью
 const popUpPreview = document.querySelector('.popup_preview');
 const popUpImage = document.querySelector('.popup__image');
 const popUpFigcaption = document.querySelector('.popup__figcaption');
 
+// кнопка закрыть
 const buttonsClose = document.querySelectorAll('.popup__close');
 
+// форма в попапе редактировать профиль
 const formEdit = document.querySelector('.popup__form_edit');
+// форма в попапе добавить карточку
 const formCreate = document.querySelector('.popup__form_add');
 
+// оболочка для импорта карточек
 const sectionCardsWrapper = document.querySelector('.grid-places');
 const template = document.querySelector('#template');
 
+// тело попапа для заыртия на оверлее
 const bodysPopup = document.querySelectorAll('.popup');
 
 // =================
@@ -155,4 +168,4 @@ bodysPopup.forEach(function (item) {
   });
 })
 
-enableValidation(formValidationConfig);
+validate.enableValidation(validate.formValidationConfig);

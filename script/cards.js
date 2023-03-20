@@ -1,4 +1,4 @@
-const initialCards = [
+export const initialCards = [
   {
     name: 'Пицунда',
     link: './images/grid-places__pizunda.jpg'
@@ -24,3 +24,4 @@ const initialCards = [
     link: './images/grid-places__donguz-orun.jpg'
   }
 ];
+// export default cards;
