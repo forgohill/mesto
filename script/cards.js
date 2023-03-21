@@ -24,4 +24,3 @@ export const initialCards = [
     link: './images/grid-places__donguz-orun.jpg'
   }
 ];
-// export default cards;
