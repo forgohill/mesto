@@ -1,6 +1,6 @@
 import { initialCards } from "./cards.js";
 import { Card } from "./Card.js";
-// import FormValidator from "./FormValidator.js";
+import { FormValidator } from "./FormValidator.js";
 import * as validate from "./validate.js";
 
 // =================
@@ -45,6 +45,18 @@ const template = document.querySelector('#template');
 // тело попапа для заыртия на оверлее
 const bodysPopup = document.querySelectorAll('.popup');
 
+// объектКлассовСелекторов для валидации
+const formValidationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit',
+  inactiveButtonClass: 'popup__submit_disabled',
+  inputErrorClass: 'popup__input_type_error',
+};
+// валидатор формы
+const formValidatorEditProfile = new FormValidator(formValidationConfig, formEdit);
+const formValidatorAddCard = new FormValidator(formValidationConfig, formCreate);
+
 // =================
 // ================= БЛОК ФУКНЦИЙ ОБРАБОТЧИКОВ=======================
 // =================
@@ -72,12 +84,14 @@ const openPopup = (popup) => {
 const clickEdit = (popup) => {
   inputName.value = `${profileName.textContent}`;
   inputMission.value = `${profileMission.textContent}`;
+  formValidatorEditProfile.resetValidation();
   // resetValidation(formEdit, formValidationConfig);
   openPopup(popUpEdit);
 }
 
 const clickAdd = () => {
   formCreate.reset();
+  formValidatorAddCard.resetValidation();
   // resetValidation(formCreate, formValidationConfig);
   openPopup(popUpAdd);
 }
@@ -137,23 +151,23 @@ const clickCreate = (evt) => {
 }
 
 
-const getCardsItems = (item) => {
-  const newItemElement = template.content.cloneNode(true);
-  const newItemTitle = newItemElement.querySelector('.cards__title')
-  const newItemImage = newItemElement.querySelector('.cards__image')
-  newItemTitle.textContent = item.name;
-  newItemImage.src = item.link;
-  newItemImage.alt = item.name;
-  const buttonLike = newItemElement.querySelector('.cards__btn-like');
-  const buttonTrash = newItemElement.querySelector('.cards__trash')
-  const buttonPreview = newItemElement.querySelector('.cards__image');
+// const getCardsItems = (item) => {
+//   const newItemElement = template.content.cloneNode(true);
+//   const newItemTitle = newItemElement.querySelector('.cards__title')
+//   const newItemImage = newItemElement.querySelector('.cards__image')
+//   newItemTitle.textContent = item.name;
+//   newItemImage.src = item.link;
+//   newItemImage.alt = item.name;
+//   const buttonLike = newItemElement.querySelector('.cards__btn-like');
+//   const buttonTrash = newItemElement.querySelector('.cards__trash')
+//   const buttonPreview = newItemElement.querySelector('.cards__image');
 
-  buttonLike.addEventListener('click', handlerLike);
-  buttonTrash.addEventListener('click', handlerTrash);
-  buttonPreview.addEventListener('click', openPreview);
+//   buttonLike.addEventListener('click', handlerLike);
+//   buttonTrash.addEventListener('click', handlerTrash);
+//   buttonPreview.addEventListener('click', openPreview);
 
-  return newItemElement;
-};
+//   return newItemElement;
+// };
 
 initialCards.forEach((item) => {
   renderCards(item, template, sectionCardsWrapper);
@@ -182,4 +196,8 @@ bodysPopup.forEach(function (item) {
   });
 })
 
+formValidatorEditProfile.enableValidation();
+formValidatorAddCard.enableValidation();
+
+console.log('==================ПЕРЕЗАГРУЗКА====================');
 // validate.enableValidation(validate.formValidationConfig);
