@@ -9,8 +9,9 @@ export class Card {
     evt.target.classList.toggle('cards__btn-like_active');
   }
 
-  _handlerTrash = (evt) => {
-    evt.target.closest('.cards').remove();
+  _handlerTrash = () => {
+    this._elementCard.remove();
+    this._elementCard = null;
   }
 
   _handlerPreview = () => {
