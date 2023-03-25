@@ -101,14 +101,20 @@ const openPreview = (evt) => {
   openPopup(popUpPreview);
 }
 
-const renderCards = (item, template, wrap) => {
-  const elementCard = new Card(item, template, openPreview);
-  wrap.append(elementCard.returnCard());
+const createCard = (item) => {
+  const card = new Card(item, template, openPreview);
+  const elementCard = card.returnCard();
+  return elementCard;
 };
 
-const addNewCards = (item, template, wrap) => {
-  const elementCard = new Card(item, template, openPreview);
-  wrap.prepend(elementCard.returnCard());
+const renderCards = (item, wrap) => {
+  const elementCard = createCard(item);
+  wrap.append(elementCard);
+};
+
+const addNewCards = (item, wrap) => {
+  const elementCard = createCard(item);
+  wrap.prepend(elementCard);
 };
 
 const clickCreate = (evt) => {
@@ -117,7 +123,7 @@ const clickCreate = (evt) => {
   const item = {};
   item.name = `${inputFoto.value}`;
   item.link = `${inputLink.value}`;
-  addNewCards(item, template, sectionCardsWrapper);
+  addNewCards(item, sectionCardsWrapper);
   evt.target.reset();
 
   closePopup(popUpAdd);
@@ -125,7 +131,7 @@ const clickCreate = (evt) => {
 
 
 initialCards.forEach((item) => {
-  renderCards(item, template, sectionCardsWrapper);
+  renderCards(item, sectionCardsWrapper);
 });
 
 // =================
