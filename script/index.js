@@ -1,41 +1,61 @@
+import { initialCards } from "./cards.js";
+import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
+
 // =================
 // ================= БЛОК DOM ЕЛЕМЕНТОВ =======================
 // =================
-
 const profileName = document.querySelector('.profile__name');
 const profileMission = document.querySelector('.profile__mission');
 
+// селекторы для редактирования профиля
 const buttonEdit = document.querySelector('.profile__btn-edit');
 const popUpEdit = document.querySelector('.popup_edit');
 const inputName = document.querySelector('.popup__input_name');
 const inputMission = document.querySelector('.popup__input_mission');
 
-
+// селекторы добавления карточки
 const buttonAdd = document.querySelector('.profile__btn-add');
 const popUpAdd = document.querySelector('.popup_add');
 const inputFoto = document.querySelector('.popup__input_foto');
 const inputLink = document.querySelector('.popup__input_link');
 
+// селекторы для включения превью
 const popUpPreview = document.querySelector('.popup_preview');
 const popUpImage = document.querySelector('.popup__image');
 const popUpFigcaption = document.querySelector('.popup__figcaption');
 
+// кнопка закрыть
 const buttonsClose = document.querySelectorAll('.popup__close');
 
+// форма в попапе редактировать профиль
 const formEdit = document.querySelector('.popup__form_edit');
+// форма в попапе добавить карточку
 const formCreate = document.querySelector('.popup__form_add');
 
+// оболочка для импорта карточек
 const sectionCardsWrapper = document.querySelector('.grid-places');
 const template = document.querySelector('#template');
 
+// тело попапа для заыртия на оверлее
 const bodysPopup = document.querySelectorAll('.popup');
+
+// объектКлассовСелекторов для валидации
+const formValidationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit',
+  inactiveButtonClass: 'popup__submit_disabled',
+  inputErrorClass: 'popup__input_type_error',
+};
+
+// валидатор формы
+const formValidatorEditProfile = new FormValidator(formValidationConfig, formEdit);
+const formValidatorAddCard = new FormValidator(formValidationConfig, formCreate);
 
 // =================
 // ================= БЛОК ФУКНЦИЙ ОБРАБОТЧИКОВ=======================
 // =================
-
-
-
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeByEscape);
@@ -57,13 +77,13 @@ const openPopup = (popup) => {
 const clickEdit = (popup) => {
   inputName.value = `${profileName.textContent}`;
   inputMission.value = `${profileMission.textContent}`;
-  resetValidation(formEdit, formValidationConfig);
+  formValidatorEditProfile.resetValidation();
   openPopup(popUpEdit);
 }
 
 const clickAdd = () => {
   formCreate.reset();
-  resetValidation(formCreate, formValidationConfig);
+  formValidatorAddCard.resetValidation();
   openPopup(popUpAdd);
 }
 
@@ -81,20 +101,14 @@ const openPreview = (evt) => {
   openPopup(popUpPreview);
 }
 
-const handlerLike = (evt) => {
-  evt.target.classList.toggle('cards__btn-like_active');
+const renderCards = (item, template, wrap) => {
+  const elementCard = new Card(item, template, openPreview);
+  wrap.append(elementCard.returnCard());
 };
 
-const handlerTrash = (evt) => {
-  evt.target.closest('.cards').remove();
-};
-
-const renderCards = (wrap, item) => {
-  wrap.append(getCardsItems(item));
-};
-
-const addNewCards = (wrap, item) => {
-  wrap.prepend(getCardsItems(item));
+const addNewCards = (item, template, wrap) => {
+  const elementCard = new Card(item, template, openPreview);
+  wrap.prepend(elementCard.returnCard());
 };
 
 const clickCreate = (evt) => {
@@ -103,33 +117,15 @@ const clickCreate = (evt) => {
   const item = {};
   item.name = `${inputFoto.value}`;
   item.link = `${inputLink.value}`;
-  addNewCards(sectionCardsWrapper, item);
+  addNewCards(item, template, sectionCardsWrapper);
   evt.target.reset();
 
   closePopup(popUpAdd);
 }
 
 
-const getCardsItems = (item) => {
-  const newItemElement = template.content.cloneNode(true);
-  const newItemTitle = newItemElement.querySelector('.cards__title')
-  const newItemImage = newItemElement.querySelector('.cards__image')
-  newItemTitle.textContent = item.name;
-  newItemImage.src = item.link;
-  newItemImage.alt = item.name;
-  const buttonLike = newItemElement.querySelector('.cards__btn-like');
-  const buttonTrash = newItemElement.querySelector('.cards__trash')
-  const buttonPreview = newItemElement.querySelector('.cards__image');
-
-  buttonLike.addEventListener('click', handlerLike);
-  buttonTrash.addEventListener('click', handlerTrash);
-  buttonPreview.addEventListener('click', openPreview);
-
-  return newItemElement;
-};
-
 initialCards.forEach((item) => {
-  renderCards(sectionCardsWrapper, item);
+  renderCards(item, template, sectionCardsWrapper);
 });
 
 // =================
@@ -155,4 +151,5 @@ bodysPopup.forEach(function (item) {
   });
 })
 
-enableValidation(formValidationConfig);
+formValidatorEditProfile.enableValidation();
+formValidatorAddCard.enableValidation();
