@@ -5,8 +5,8 @@ export class Card {
     this._openPreview = openPreview;
   }
 
-  _handlerLike = (evt) => {
-    evt.target.classList.toggle('cards__btn-like_active');
+  _handlerLike = () => {
+    this._likeButton.classList.toggle('cards__btn-like_active');
   }
 
   _handlerTrash = () => {
@@ -15,19 +15,37 @@ export class Card {
   }
 
   _handlerPreview = () => {
-    this._openPreview(this._date.link, this._date.name)
+    this._openPreview(this._date.link, this._date.name);
+  }
+
+  _getTemplateCard = () => {
+    this._elementCard = this._template.cloneNode(true).children[0];
+  }
+
+  _setEventListeners = () => {
+    this._cardImage = this._elementCard.querySelector('.cards__image');
+    this._likeButton = this._elementCard.querySelector('.cards__btn-like');
+    this._likeTrash = this._elementCard.querySelector('.cards__trash');
+
+    this._likeButton.addEventListener('click', () => {
+      this._handlerLike();
+    });
+    this._likeTrash.addEventListener('click', () => {
+      this._handlerTrash();
+    });
+    this._cardImage.addEventListener('click', () => {
+      this._handlerPreview();
+    });
   }
 
   returnCard() {
-    this._elementCard = this._template.cloneNode(true).children[0];
-
+    this._getTemplateCard();
+    this._setEventListeners();
     this._elementCard.querySelector('.cards__title').textContent = this._date.name;
-    this._elementCard.querySelector('.cards__image').src = this._date.link;
-    this._elementCard.querySelector('.cards__image').alt = this._date.name;
+    this._cardImage.src = this._date.link;
+    this._cardImage.alt = this._date.name;
 
-    this._elementCard.querySelector('.cards__btn-like').addEventListener('click', this._handlerLike);
-    this._elementCard.querySelector('.cards__trash').addEventListener('click', this._handlerTrash);
-    this._elementCard.querySelector('.cards__image').addEventListener('click', this._handlerPreview);
+
 
     return this._elementCard;
   }
