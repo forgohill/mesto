@@ -13,6 +13,10 @@ export class Card {
     evt.target.closest('.cards').remove();
   }
 
+  _handlerPreview = () => {
+    this._openPreview(this._date.link, this._date.name)
+  }
+
   returnCard() {
     this._elementCard = this._template.cloneNode(true).children[0];
 
@@ -22,7 +26,7 @@ export class Card {
 
     this._elementCard.querySelector('.cards__btn-like').addEventListener('click', this._handlerLike);
     this._elementCard.querySelector('.cards__trash').addEventListener('click', this._handlerTrash);
-    this._elementCard.querySelector('.cards__image').addEventListener('click', this._openPreview);
+    this._elementCard.querySelector('.cards__image').addEventListener('click', this._handlerPreview);
 
     return this._elementCard;
   }

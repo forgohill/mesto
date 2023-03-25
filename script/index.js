@@ -94,10 +94,10 @@ const clickSubmit = (evt) => {
   closePopup(popUpEdit);
 };
 
-const openPreview = (evt) => {
-  popUpImage.src = evt.target.src;
-  popUpImage.alt = evt.target.alt;
-  popUpFigcaption.textContent = evt.target.closest('.cards').querySelector('.cards__title').textContent;
+const openPreview = (link, name) => {
+  popUpImage.src = link;
+  popUpImage.alt = name;
+  popUpFigcaption.textContent = name;
   openPopup(popUpPreview);
 }
 
