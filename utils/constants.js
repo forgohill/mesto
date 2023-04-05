@@ -33,7 +33,7 @@ export const formCreate = document.querySelector('.popup__form_add');
 export const sectionCardsWrapper = document.querySelector('.grid-places');
 export const template = document.querySelector('#template');
 
-// тело попапа для заыртия на оверлее
+// тело попапа для закрытия на оверлее
 export const bodysPopup = document.querySelectorAll('.popup');
 
 // объектКлассовСелекторов для валидации
@@ -43,4 +43,42 @@ export const formValidationConfig = {
   submitButtonSelector: '.popup__submit',
   inactiveButtonClass: 'popup__submit_disabled',
   inputErrorClass: 'popup__input_type_error',
+};
+
+// объектКлассовСелекторов для взаимодествия
+export const interactionConfig = {
+  profileName: '.profile__name',
+  profileMission: '.profile__mission',
+
+  // селекторы для редактирования профиля
+  buttonEdit: '.profile__btn-edit',
+  popUpEdit: '.popup_edit',
+  inputName: '.popup__input_name',
+  inputMission: '.popup__input_mission',
+
+  // селекторы добавления карточки
+  buttonAdd: '.profile__btn-add',
+  popUpAdd: '.popup_add',
+  inputFoto: '.popup__input_foto',
+  inputLink: '.popup__input_link',
+
+  // селекторы для включения превью
+  popUpPreview: '.popup_preview',
+  popUpImage: '.popup__image',
+  popUpFigcaption: '.popup__figcaption',
+
+  // кнопка закрыть
+  buttonsClose: '.popup__close',
+
+  // форма в попапе редактировать профиль
+  formEdit: '.popup__form_edit',
+  // форма в попапе добавить карточку
+  formCreate: '.popup__form_add',
+
+  // оболочка для импорта карточек
+  sectionCardsWrapper: '.grid-places',
+  template: '#template',
+
+  // тело попапа для закрытия на оверлее
+  bodysPopup: '.popup',
 };

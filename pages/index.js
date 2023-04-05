@@ -23,9 +23,11 @@ import {
   template,
   bodysPopup,
   formValidationConfig,
+  interactionConfig,
 } from "../utils/constants.js";
 
 import { Section } from '../components/Section.js';
+import { Popup } from "../components/Popup.js";
 // =================
 // ================= БЛОК DOM ЕЛЕМЕНТОВ =======================
 // =================
@@ -82,35 +84,44 @@ const formValidatorAddCard = new FormValidator(formValidationConfig, formCreate)
 // =================
 // ================= БЛОК ФУКНЦИЙ ОБРАБОТЧИКОВ=======================
 // =================
-const closePopup = (popup) => {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeByEscape);
-}
 
-const closeByEscape = (evt) => {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
 
-    closePopup(openedPopup);
-  }
-};
 
-const openPopup = (popup) => {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closeByEscape);
-};
+// const closePopup = (popup) => {
+//   popup.classList.remove('popup_opened');
+//   // document.removeEventListener('keydown', closeByEscape);
+// }
 
+// const closeByEscape = (evt) => {
+//   if (evt.key === 'Escape') {
+//     const openedPopup = document.querySelector('.popup_opened');
+
+//     closePopup(openedPopup);
+//   }
+// };
+
+// const openPopup = (popup) => {
+//   popup.classList.add('popup_opened');
+//   document.addEventListener('keydown', closeByEscape);
+// };
+
+const editPopup = new Popup(interactionConfig.popUpEdit);
 const clickEdit = (popup) => {
   inputName.value = `${profileName.textContent}`;
   inputMission.value = `${profileMission.textContent}`;
   formValidatorEditProfile.resetValidation();
-  openPopup(popUpEdit);
+  // openPopup(popUpEdit);
+
+  editPopup.open();
 }
 
+const addPopup = new Popup(interactionConfig.popUpAdd);
 const clickAdd = () => {
   formCreate.reset();
   formValidatorAddCard.resetValidation();
-  openPopup(popUpAdd);
+  // openPopup(popUpAdd);
+
+  addPopup.open();
 }
 
 const clickSubmit = (evt) => {
@@ -157,10 +168,12 @@ const addSectionCard = new Section(
       addSectionCard.addItem(createCard(item));
     }
   },
-  '.grid-places'
+  interactionConfig.sectionCardsWrapper
+
 );
 
 addSectionCard.renderItems();
+
 
 
 const clickCreate = (evt) => {
@@ -188,22 +201,23 @@ const clickCreate = (evt) => {
 
 formEdit.addEventListener('submit', clickSubmit);
 formCreate.addEventListener('submit', clickCreate);
+
 buttonEdit.addEventListener('click', clickEdit);
 buttonAdd.addEventListener('click', clickAdd);
 
-buttonsClose.forEach(function (item) {
-  item.addEventListener('click', (e) => {
-    closePopup(e.target.closest('.popup'))
-  });
-});
+// buttonsClose.forEach(function (item) {
+//   item.addEventListener('click', (e) => {
+//     closePopup(e.target.closest('.popup'))
+//   });
+// });
 
-bodysPopup.forEach(function (item) {
-  item.addEventListener('click', (e) => {
-    if (e.target.classList.contains('popup')) {
-      closePopup(e.target.closest('.popup'))
-    }
-  });
-})
+// bodysPopup.forEach(function (item) {
+//   item.addEventListener('click', (e) => {
+//     if (e.target.classList.contains('popup')) {
+//       closePopup(e.target.closest('.popup'))
+//     }
+//   });
+// })
 
 formValidatorEditProfile.enableValidation();
 formValidatorAddCard.enableValidation();
