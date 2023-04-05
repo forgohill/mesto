@@ -25,6 +25,7 @@ import {
   formValidationConfig,
 } from "../utils/constants.js";
 
+import { Section } from '../components/Section.js';
 // =================
 // ================= БЛОК DOM ЕЛЕМЕНТОВ =======================
 // =================
@@ -75,6 +76,8 @@ import {
 // валидатор формы
 const formValidatorEditProfile = new FormValidator(formValidationConfig, formEdit);
 const formValidatorAddCard = new FormValidator(formValidationConfig, formCreate);
+
+
 
 // =================
 // ================= БЛОК ФУКНЦИЙ ОБРАБОТЧИКОВ=======================
@@ -130,15 +133,35 @@ const createCard = (item) => {
   return elementCard;
 };
 
-const renderCards = (item, wrap) => {
-  const elementCard = createCard(item);
-  wrap.append(elementCard);
-};
+// const renderCards = (item, wrap) => {
+//   const elementCard = createCard(item);
+//   wrap.append(elementCard);
+// };
 
-const addNewCards = (item, wrap) => {
-  const elementCard = createCard(item);
-  wrap.prepend(elementCard);
-};
+
+// const renderCards = (item) => {
+//   const elementCard = createCard(item);
+// };
+
+
+// const addNewCards = (item, wrap) => {
+//   const elementCard = createCard(item);
+//   wrap.prepend(elementCard);
+// };
+
+
+const addSectionCard = new Section(
+  {
+    data: initialCards,
+    renderer: (item) => {
+      addSectionCard.addItem(createCard(item));
+    }
+  },
+  '.grid-places'
+);
+
+addSectionCard.renderItems();
+
 
 const clickCreate = (evt) => {
   evt.preventDefault();
@@ -146,16 +169,18 @@ const clickCreate = (evt) => {
   const item = {};
   item.name = `${inputFoto.value}`;
   item.link = `${inputLink.value}`;
-  addNewCards(item, sectionCardsWrapper);
+  addSectionCard.addItem(createCard(item));
+  // addNewCards(item, sectionCardsWrapper);
+
   evt.target.reset();
 
   closePopup(popUpAdd);
 }
 
 
-initialCards.forEach((item) => {
-  renderCards(item, sectionCardsWrapper);
-});
+// initialCards.forEach((item) => {
+//   renderCards(item, sectionCardsWrapper);
+// });
 
 // =================
 // ================= БЛОК СЛУШАТЕЛЕЙ СОБЫТИЙ =======================
