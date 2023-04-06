@@ -14,15 +14,6 @@ export class Card {
     this._elementCard = null;
   }
 
-  // _handlerPreview = () => {
-  //   this._openPreview(this._date.link, this._date.name);
-  // }
-
-  // _handleCardClick = () => {
-
-  // }
-
-
   _getTemplateCard() {
     this._elementCard = this._template.cloneNode(true).children[0];
   }
@@ -42,15 +33,6 @@ export class Card {
     this._cardImage.addEventListener('click', () => {
       this._handleCardClick(this._elementCard);
     });
-
-
-
-    // this._cardImage.addEventListener('click', () => {
-    //   this._handlerPreview();
-    // });
-
-
-
   }
 
   returnCard() {
