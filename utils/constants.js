@@ -47,8 +47,8 @@ export const formValidationConfig = {
 
 // объектКлассовСелекторов для взаимодествия
 export const interactionConfig = {
-  profileName: '.profile__name',
-  profileMission: '.profile__mission',
+  selectorName: '.profile__name',
+  selectorMission: '.profile__mission',
 
   // селекторы для редактирования профиля
   buttonEdit: '.profile__btn-edit',

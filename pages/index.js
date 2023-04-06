@@ -30,6 +30,7 @@ import { Section } from '../components/Section.js';
 import { Popup } from "../components/Popup.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
+import { UserInfo } from "../components/UserInfo.js";
 // =================
 // ================= БЛОК DOM ЕЛЕМЕНТОВ =======================
 // =================
@@ -108,13 +109,16 @@ const formValidatorAddCard = new FormValidator(formValidationConfig, formCreate)
 // };
 
 
-
+const userInfo = new UserInfo(interactionConfig);
 
 
 const handleFormEdit = (data) => {
 
-  profileName.textContent = `${data.inputName}`;
-  profileMission.textContent = `${data.inputMission}`;
+  userInfo.setUserInfo(data);
+
+
+  // profileName.textContent = `${data.inputName}`;
+  // profileMission.textContent = `${data.inputMission}`;
 
   // console.log(data);
   console.log(data);
@@ -122,11 +126,16 @@ const handleFormEdit = (data) => {
 }
 // const editPopup = new Popup(interactionConfig.popUpEdit);
 const editPopup = new PopupWithForm(interactionConfig.popUpEdit, handleFormEdit);
+editPopup.setEventListeners();
 
+const clickEdit = () => {
+  const data = userInfo.getUserInfo();
+  console.log(data);
+  inputName.value = data.name;
+  inputMission.value = data.mission;
 
-const clickEdit = (popup) => {
-  inputName.value = `${profileName.textContent}`;
-  inputMission.value = `${profileMission.textContent}`;
+  // inputName.value = `${profileName.textContent}`;
+  // inputMission.value = `${profileMission.textContent}`;
   formValidatorEditProfile.resetValidation();
   // openPopup(popUpEdit);
   // editPopup.setEventListeners();
@@ -153,7 +162,7 @@ const handleFormAdd = (data) => {
 }
 // const addPopup = new Popup(interactionConfig.popUpAdd);
 const addPopup = new PopupWithForm(interactionConfig.popUpAdd, handleFormAdd);
-
+addPopup.setEventListeners();
 const clickAdd = () => {
   // formCreate.reset();
   formValidatorAddCard.resetValidation();
@@ -164,15 +173,15 @@ const clickAdd = () => {
 
 
 
-const clickSubmit = (evt) => {
-  evt.preventDefault();
-  profileName.textContent = `${inputName.value}`;
-  profileMission.textContent = `${inputMission.value}`;
-  closePopup(popUpEdit);
-};
+// const clickSubmit = (evt) => {
+//   evt.preventDefault();
+//   profileName.textContent = `${inputName.value}`;
+//   profileMission.textContent = `${inputMission.value}`;
+//   closePopup(popUpEdit);
+// };
 
 const popupPreview = new PopupWithImage(interactionConfig.popUpPreview);
-
+popupPreview.setEventListeners();
 // const openPreview = (link, name) => {
 //   popUpImage.src = link;
 //   popUpImage.alt = name;
