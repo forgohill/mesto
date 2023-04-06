@@ -5,11 +5,11 @@ export class Card {
     this._handleCardClick = handleCardClick;
   }
 
-  _handlerLike = () => {
+  _handlerLike() {
     this._likeButton.classList.toggle('cards__btn-like_active');
   }
 
-  _handlerTrash = () => {
+  _handlerTrash() {
     this._elementCard.remove();
     this._elementCard = null;
   }
@@ -23,11 +23,11 @@ export class Card {
   // }
 
 
-  _getTemplateCard = () => {
+  _getTemplateCard() {
     this._elementCard = this._template.cloneNode(true).children[0];
   }
 
-  _setEventListeners = () => {
+  _setEventListeners() {
     this._cardImage = this._elementCard.querySelector('.cards__image');
     this._likeButton = this._elementCard.querySelector('.cards__btn-like');
     this._likeTrash = this._elementCard.querySelector('.cards__trash');
