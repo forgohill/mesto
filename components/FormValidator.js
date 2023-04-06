@@ -4,26 +4,26 @@ export class FormValidator {
     this._formElement = formElement;
   }
 
-  _showInputError = (inputElement, errorMessage) => {
+  _showInputError(inputElement, errorMessage) {
     const errorElement = this._formElement.querySelector(`.popup__error_${inputElement.id}`);
     inputElement.classList.add(this._config.inputErrorClass);
     errorElement.textContent = errorMessage;
   }
 
-  _hideInputError = (inputElement) => {
+  _hideInputError(inputElement) {
     const errorElement = this._formElement.querySelector(`.popup__error_${inputElement.id}`);
     inputElement.classList.remove(this._config.inputErrorClass);
     errorElement.textContent = '';
   }
 
-  _toggleButton = () => {
+  _toggleButton() {
     const buttonSubmit = this._formElement.querySelector(this._config.submitButtonSelector);
     const isFormValid = this._formElement.checkValidity();
     buttonSubmit.disabled = !isFormValid;
     buttonSubmit.classList.toggle(this._config.inactiveButtonClass, !isFormValid);
   }
 
-  _isValid = (inputElement) => {
+  _isValid(inputElement) {
 
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
@@ -32,9 +32,9 @@ export class FormValidator {
     }
   }
 
-  _disableSubmit = (evt) => { evt.preventDefault(); }
+  _disableSubmit(evt) { evt.preventDefault(); }
 
-  _setEventListeners = () => {
+  _setEventListeners() {
     this._formElement.addEventListener('submit', this._disableSubmit);
     const inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
     inputList.forEach((inputElement) => {
@@ -46,19 +46,19 @@ export class FormValidator {
     });
   }
 
-  _resetInputError = () => {
+  _resetInputError() {
     const inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
     inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });
   }
 
-  resetValidation = () => {
+  resetValidation() {
     this._resetInputError();
     this._toggleButton();
   }
 
-  enableValidation = () => {
+  enableValidation() {
     this._setEventListeners();
   }
 }

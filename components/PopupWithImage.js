@@ -9,8 +9,8 @@ export class PopupWithImage extends Popup {
   }
 
 
-  openPopup = (element) => {
-    console.log(element);
+  openPopup(element) {
+    // console.log(element);
 
     this._elementImage = element.querySelector('.cards__image');
     this._elementTitle = element.querySelector('.cards__title');
@@ -19,12 +19,12 @@ export class PopupWithImage extends Popup {
     this._popupImage.alt = this._elementTitle.textContent;
     this._popupTitle.textContent = this._elementTitle.textContent;
 
-    console.log(this._elementImage);
-    console.log(this._elementTitle);
-    console.log(this._popupImage);
-    console.log(this._popupTitle);
+    // console.log(this._elementImage);
+    // console.log(this._elementTitle);
+    // console.log(this._popupImage);
+    // console.log(this._popupTitle);
 
-    console.log(super.openPopup);
+    // console.log(super.openPopup);
     super.openPopup();
     // console.log(this._popup)
   }
