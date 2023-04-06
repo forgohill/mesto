@@ -3,50 +3,31 @@ import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 
 import {
-  profileName,
-  profileMission,
   buttonEdit,
-  popUpEdit,
   inputName,
   inputMission,
   buttonAdd,
-  popUpAdd,
-  inputFoto,
-  inputLink,
-  popUpPreview,
-  popUpImage,
-  popUpFigcaption,
-  buttonsClose,
   formEdit,
   formCreate,
-  sectionCardsWrapper,
   template,
-  bodysPopup,
   formValidationConfig,
   interactionConfig,
 } from "../utils/constants.js";
 
 import { Section } from '../components/Section.js';
-import { Popup } from "../components/Popup.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { UserInfo } from "../components/UserInfo.js";
-
-
 
 // валидатор формы
 const formValidatorEditProfile = new FormValidator(formValidationConfig, formEdit);
 const formValidatorAddCard = new FormValidator(formValidationConfig, formCreate);
 
-
-
 // =================
 // ================= БЛОК ФУКНЦИЙ ОБРАБОТЧИКОВ=======================
 // =================
 
-
 const userInfo = new UserInfo(interactionConfig);
-
 
 const handleFormEdit = (data) => {
   userInfo.setUserInfo(data);
@@ -84,9 +65,9 @@ const handleCardClick = (elementCard) => {
   popupPreview.openPopup(elementCard);
 };
 
-const editPopup = new PopupWithForm(interactionConfig.popUpEdit, handleFormEdit);
-const addPopup = new PopupWithForm(interactionConfig.popUpAdd, handleFormAdd);
-const popupPreview = new PopupWithImage(interactionConfig.popUpPreview);
+const editPopup = new PopupWithForm(interactionConfig.selectorPopupEdit, handleFormEdit);
+const addPopup = new PopupWithForm(interactionConfig.selectorPopupAdd, handleFormAdd);
+const popupPreview = new PopupWithImage(interactionConfig.selectorPopupPreview);
 
 const addSectionCard = new Section(
   {
@@ -95,7 +76,7 @@ const addSectionCard = new Section(
       addSectionCard.addItem(createCard(item));
     }
   },
-  interactionConfig.sectionCardsWrapper
+  interactionConfig.selectorSectionCardsWrapper
 );
 
 addSectionCard.renderItems();
