@@ -1,28 +1,24 @@
 export class Card {
-  constructor(date, template, openPreview) {
+  constructor(date, template, handleCardClick) {
     this._date = date;
     this._template = template.content;
-    this._openPreview = openPreview;
+    this._handleCardClick = handleCardClick;
   }
 
-  _handlerLike = () => {
+  _handlerLike() {
     this._likeButton.classList.toggle('cards__btn-like_active');
   }
 
-  _handlerTrash = () => {
+  _handlerTrash() {
     this._elementCard.remove();
     this._elementCard = null;
   }
 
-  _handlerPreview = () => {
-    this._openPreview(this._date.link, this._date.name);
-  }
-
-  _getTemplateCard = () => {
+  _getTemplateCard() {
     this._elementCard = this._template.cloneNode(true).children[0];
   }
 
-  _setEventListeners = () => {
+  _setEventListeners() {
     this._cardImage = this._elementCard.querySelector('.cards__image');
     this._likeButton = this._elementCard.querySelector('.cards__btn-like');
     this._likeTrash = this._elementCard.querySelector('.cards__trash');
@@ -33,8 +29,9 @@ export class Card {
     this._likeTrash.addEventListener('click', () => {
       this._handlerTrash();
     });
+
     this._cardImage.addEventListener('click', () => {
-      this._handlerPreview();
+      this._handleCardClick(this._elementCard);
     });
   }
 
