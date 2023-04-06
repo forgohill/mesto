@@ -29,6 +29,7 @@ import {
 import { Section } from '../components/Section.js';
 import { Popup } from "../components/Popup.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
 // =================
 // ================= БЛОК DOM ЕЛЕМЕНТОВ =======================
 // =================
@@ -106,24 +107,62 @@ const formValidatorAddCard = new FormValidator(formValidationConfig, formCreate)
 //   document.addEventListener('keydown', closeByEscape);
 // };
 
-const editPopup = new Popup(interactionConfig.popUpEdit);
+
+
+
+
+const handleFormEdit = (data) => {
+
+  profileName.textContent = `${data.inputName}`;
+  profileMission.textContent = `${data.inputMission}`;
+
+  // console.log(data);
+  console.log(data);
+  editPopup.closePopup();
+}
+// const editPopup = new Popup(interactionConfig.popUpEdit);
+const editPopup = new PopupWithForm(interactionConfig.popUpEdit, handleFormEdit);
+
+
 const clickEdit = (popup) => {
   inputName.value = `${profileName.textContent}`;
   inputMission.value = `${profileMission.textContent}`;
   formValidatorEditProfile.resetValidation();
   // openPopup(popUpEdit);
-
+  // editPopup.setEventListeners();
   editPopup.openPopup();
+
 }
 
-const addPopup = new Popup(interactionConfig.popUpAdd);
+
+
+
+
+const handleFormAdd = (data) => {
+  console.log(data);
+  const item = {};
+  item.name = `${data.inputFoto}`;
+  item.link = `${data.inputLink}`;
+  addSectionCard.addItem(createCard(item));
+  // addNewCards(item, sectionCardsWrapper);
+
+  // evt.target.reset();
+
+
+  addPopup.closePopup();
+}
+// const addPopup = new Popup(interactionConfig.popUpAdd);
+const addPopup = new PopupWithForm(interactionConfig.popUpAdd, handleFormAdd);
+
 const clickAdd = () => {
-  formCreate.reset();
+  // formCreate.reset();
   formValidatorAddCard.resetValidation();
   // openPopup(popUpAdd);
-
+  // editPopup.setEventListeners();
   addPopup.openPopup();
 }
+
+
 
 const clickSubmit = (evt) => {
   evt.preventDefault();
@@ -208,8 +247,8 @@ const clickCreate = (evt) => {
 // ================= БЛОК СЛУШАТЕЛЕЙ СОБЫТИЙ =======================
 // =================
 
-formEdit.addEventListener('submit', clickSubmit);
-formCreate.addEventListener('submit', clickCreate);
+// formEdit.addEventListener('submit', clickSubmit);
+// formCreate.addEventListener('submit', clickCreate);
 
 buttonEdit.addEventListener('click', clickEdit);
 buttonAdd.addEventListener('click', clickAdd);
