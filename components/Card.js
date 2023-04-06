@@ -1,8 +1,8 @@
 export class Card {
-  constructor(date, template, openPreview) {
+  constructor(date, template, handleCardClick) {
     this._date = date;
     this._template = template.content;
-    this._openPreview = openPreview;
+    this._handleCardClick = handleCardClick;
   }
 
   _handlerLike = () => {
@@ -14,9 +14,14 @@ export class Card {
     this._elementCard = null;
   }
 
-  _handlerPreview = () => {
-    this._openPreview(this._date.link, this._date.name);
-  }
+  // _handlerPreview = () => {
+  //   this._openPreview(this._date.link, this._date.name);
+  // }
+
+  // _handleCardClick = () => {
+
+  // }
+
 
   _getTemplateCard = () => {
     this._elementCard = this._template.cloneNode(true).children[0];
@@ -33,9 +38,19 @@ export class Card {
     this._likeTrash.addEventListener('click', () => {
       this._handlerTrash();
     });
+
     this._cardImage.addEventListener('click', () => {
-      this._handlerPreview();
+      this._handleCardClick(this._elementCard);
     });
+
+
+
+    // this._cardImage.addEventListener('click', () => {
+    //   this._handlerPreview();
+    // });
+
+
+
   }
 
   returnCard() {

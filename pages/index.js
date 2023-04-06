@@ -28,6 +28,7 @@ import {
 
 import { Section } from '../components/Section.js';
 import { Popup } from "../components/Popup.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
 // =================
 // ================= БЛОК DOM ЕЛЕМЕНТОВ =======================
 // =================
@@ -112,7 +113,7 @@ const clickEdit = (popup) => {
   formValidatorEditProfile.resetValidation();
   // openPopup(popUpEdit);
 
-  editPopup.open();
+  editPopup.openPopup();
 }
 
 const addPopup = new Popup(interactionConfig.popUpAdd);
@@ -121,7 +122,7 @@ const clickAdd = () => {
   formValidatorAddCard.resetValidation();
   // openPopup(popUpAdd);
 
-  addPopup.open();
+  addPopup.openPopup();
 }
 
 const clickSubmit = (evt) => {
@@ -131,18 +132,26 @@ const clickSubmit = (evt) => {
   closePopup(popUpEdit);
 };
 
-const openPreview = (link, name) => {
-  popUpImage.src = link;
-  popUpImage.alt = name;
-  popUpFigcaption.textContent = name;
-  openPopup(popUpPreview);
-}
+const popupPreview = new PopupWithImage(interactionConfig.popUpPreview);
+
+// const openPreview = (link, name) => {
+//   popUpImage.src = link;
+//   popUpImage.alt = name;
+//   popUpFigcaption.textContent = name;
+//   openPopup(popUpPreview);
+// }
+
+
 
 const createCard = (item) => {
-  const card = new Card(item, template, openPreview);
+  const card = new Card(item, template, handleCardClick);
   const elementCard = card.returnCard();
   return elementCard;
 };
+
+const handleCardClick = (elementCard) => {
+  popupPreview.openPopup(elementCard);
+}
 
 // const renderCards = (item, wrap) => {
 //   const elementCard = createCard(item);
