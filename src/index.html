@@ -6,7 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Проект: Место</title>
-  <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body>
@@ -14,13 +13,14 @@
   <div class="page">
     <header class="header">
       <a href="#" class="header__link links" title="Переход на главную - проект: место."><img
-          src="./images/header__logo.svg" alt="Логотип проекта Место" class="header__logo"></a>
+          src="<%=require('./images/header__logo.svg')%>" alt="Логотип проекта Место" class="header__logo"></a>
     </header>
 
     <main class="main">
       <section class="profile">
         <div class="profile__container">
-          <img src="./images/profile__avatar.jpg" alt="Жак-Ив-Кусто. Фотография. Пртрет." class="profile__avatar">
+          <img src="<%=require('./images/profile__avatar.jpg')%>" alt="Жак-Ив-Кусто. Фотография. Пртрет."
+            class="profile__avatar">
           <div class="profile__wrapper">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <p class="profile__mission">Исследователь океана</p>
@@ -43,7 +43,7 @@
 
     <div class="popup popup_preview">
       <figure class="popup__figure">
-        <img src="#" alt="Место" class="popup__image">
+        <img alt="Место" class="popup__image">
         <figcaption class="popup__figcaption">Пицунда</figcaption>
         <button type="button" name="button-close" aria-label="Закрыть окно"
           class="popup__close popup__close_edit links"></button>
@@ -120,7 +120,7 @@
 
   <template id="template">
     <article class="grid-places__cards cards">
-      <img src="#" alt="Место загруженное пользователем" class="cards__image">
+      <img alt="Место загруженное пользователем" class="cards__image">
       <div class="cards__wrapper">
         <h2 class="cards__title"></h2>
         <button type="button" aria-label="Понравилось" class="cards__btn-like"></button>
@@ -129,7 +129,7 @@
     </article>
   </template>
 
-  <script type="module" src="./pages/index.js"></script>
+
 
 
 </body>

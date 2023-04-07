@@ -1,3 +1,4 @@
+import './index.css';
 import { initialCards } from "../utils/cards.js";
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
@@ -24,7 +25,7 @@ const formValidatorEditProfile = new FormValidator(formValidationConfig, formEdi
 const formValidatorAddCard = new FormValidator(formValidationConfig, formCreate);
 
 // =================
-// ================= БЛОК ФУКНЦИЙ ОБРАБОТЧИКОВ=======================
+// ================= БЛОК ЭКЗЕМПЛЯРОВ ОБРАБОТЧИКОВ=======================
 // =================
 
 const userInfo = new UserInfo(interactionConfig);

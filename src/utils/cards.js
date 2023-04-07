@@ -1,26 +1,36 @@
+
+
+import gridPlacesPizunda from '../images/grid-places__pizunda.jpg';
+import birobidzhan from '../images/grid-places__birobidzhan.jpg';
+import blagoveshchensk from '../images/grid-places__blagoveshchensk.jpg';
+import nizhniNovgorod from '../images/grid-places__nizhni-novgorod.jpg';
+import suzdal from '../images/grid-places__suzdal.jpg';
+import donguzOrun from '../images/grid-places__donguz-orun.jpg';
+
+
 export const initialCards = [
   {
     name: 'Пицунда',
-    link: './images/grid-places__pizunda.jpg'
+    link: gridPlacesPizunda,
   },
   {
     name: 'Биробиджан',
-    link: './images/grid-places__birobidzhan.jpg'
+    link: birobidzhan,
   },
   {
     name: 'Благовещенск',
-    link: './images/grid-places__blagoveshchensk.jpg'
+    link: blagoveshchensk,
   },
   {
     name: 'Нижний Новгород',
-    link: './images/grid-places__nizhni-novgorod.jpg'
+    link: nizhniNovgorod,
   },
   {
     name: 'Суздаль',
-    link: './images/grid-places__suzdal.jpg'
+    link: suzdal,
   },
   {
     name: 'Донгуз-Орун',
-    link: './images/grid-places__donguz-orun.jpg'
+    link: donguzOrun,
   }
 ];
