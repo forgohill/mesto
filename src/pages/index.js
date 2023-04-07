@@ -36,7 +36,6 @@ const handleFormEdit = (data) => {
 }
 
 const handleFormAdd = (data) => {
-  console.log(data);
   const item = {};
   item.name = `${data.inputFoto}`;
   item.link = `${data.inputLink}`;
