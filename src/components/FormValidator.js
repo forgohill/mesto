@@ -2,6 +2,11 @@ export class FormValidator {
   constructor(config, formElement) {
     this._config = config;
     this._formElement = formElement;
+
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
+    this._buttonSubmit = formElement.querySelector(config.submitButtonSelector);
+
+
   }
 
   _showInputError(inputElement, errorMessage) {
@@ -17,10 +22,9 @@ export class FormValidator {
   }
 
   _toggleButton() {
-    const buttonSubmit = this._formElement.querySelector(this._config.submitButtonSelector);
     const isFormValid = this._formElement.checkValidity();
-    buttonSubmit.disabled = !isFormValid;
-    buttonSubmit.classList.toggle(this._config.inactiveButtonClass, !isFormValid);
+    this._buttonSubmit.disabled = !isFormValid;
+    this._buttonSubmit.classList.toggle(this._config.inactiveButtonClass, !isFormValid);
   }
 
   _isValid(inputElement) {
@@ -36,9 +40,7 @@ export class FormValidator {
 
   _setEventListeners() {
     this._formElement.addEventListener('submit', this._disableSubmit);
-    const inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
-    inputList.forEach((inputElement) => {
-      const formElement = inputElement.closest(this._config.formSelector);
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._isValid(inputElement);
         this._toggleButton();
@@ -47,8 +49,8 @@ export class FormValidator {
   }
 
   _resetInputError() {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
-    inputList.forEach((inputElement) => {
+
+    this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });
   }
