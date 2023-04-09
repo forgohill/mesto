@@ -61,8 +61,8 @@ const createCard = (item) => {
   return elementCard;
 };
 
-const handleCardClick = (elementCard) => {
-  popupPreview.openPopup(elementCard);
+const handleCardClick = (name, link) => {
+  popupPreview.openPopup(name, link);
 };
 
 const editPopup = new PopupWithForm(interactionConfig.selectorPopupEdit, handleFormEdit);
