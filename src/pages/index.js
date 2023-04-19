@@ -81,6 +81,8 @@ const addSectionCard = new Section(
 
 addSectionCard.renderItems();
 
+// ПОДГРУЖАЕТ ПРОФИЛЬ С СЕРВЕРА
+userInfo.getServerUserInfo();
 
 // =================
 // ================= БЛОК СЛУШАТЕЛЕЙ СОБЫТИЙ =======================

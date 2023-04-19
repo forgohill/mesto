@@ -27,6 +27,7 @@ export const formValidationConfig = {
 export const interactionConfig = {
   selectorName: '.profile__name',
   selectorMission: '.profile__mission',
+  selectorAvatar: '.profile__avatar',
   selectorPopupEdit: '.popup_edit',
   selectorPopupAdd: '.popup_add',
   selectorPopupPreview: '.popup_preview',
