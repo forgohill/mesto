@@ -1,5 +1,5 @@
 import './index.css';
-import { initialCards } from "../utils/cards.js";
+// import { initialCards } from "../utils/cards.js";
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 
@@ -13,13 +13,15 @@ import {
   template,
   formValidationConfig,
   interactionConfig,
+  configApi
 } from "../utils/constants.js";
 
 import { Section } from '../components/Section.js';
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { UserInfo } from "../components/UserInfo.js";
-
+import { Api } from '../components/Api.js'
+import { data } from 'autoprefixer';
 // валидатор формы
 const formValidatorEditProfile = new FormValidator(formValidationConfig, formEdit);
 const formValidatorAddCard = new FormValidator(formValidationConfig, formCreate);
@@ -69,20 +71,53 @@ const editPopup = new PopupWithForm(interactionConfig.selectorPopupEdit, handleF
 const addPopup = new PopupWithForm(interactionConfig.selectorPopupAdd, handleFormAdd);
 const popupPreview = new PopupWithImage(interactionConfig.selectorPopupPreview);
 
-const addSectionCard = new Section(
-  {
-    data: initialCards,
-    renderer: (item) => {
-      addSectionCard.addItem(createCard(item));
-    }
-  },
-  interactionConfig.selectorSectionCardsWrapper
-);
+// const addSectionCard = new Section(
+//   {
+//     data: initialCards,
+//     renderer: (item) => {
+//       addSectionCard.addItem(createCard(item));
+//     }
+//   },
+//   interactionConfig.selectorSectionCardsWrapper
+// );
 
-addSectionCard.renderItems();
+// addSectionCard.renderItems();
 
-// ПОДГРУЖАЕТ ПРОФИЛЬ С СЕРВЕРА
-userInfo.getServerUserInfo();
+// СОЗДАЁМ АПИ С КОНИФГУРАЦИЕЙ
+const api = new Api(configApi);
+
+
+const userInfoApi = api.getUserInfo();
+// обновление UserInfo
+userInfoApi
+  .then((data) => {
+    console.log(data);
+    userInfo.refreshUserInfo(data);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+const cardsApi = api.getCards();
+cardsApi
+  .then((data) => {
+    const addSectionCard = new Section(
+      {
+        data,
+        renderer: (item) => {
+          addSectionCard.addItem(createCard(item));
+        }
+      },
+      interactionConfig.selectorSectionCardsWrapper
+    );
+
+    addSectionCard.renderItems();
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+// userInfo.getServerUserInfo();
 
 // =================
 // ================= БЛОК СЛУШАТЕЛЕЙ СОБЫТИЙ =======================

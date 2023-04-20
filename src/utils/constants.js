@@ -33,3 +33,11 @@ export const interactionConfig = {
   selectorPopupPreview: '.popup_preview',
   selectorSectionCardsWrapper: '.grid-places',
 };
+
+export const configApi = {
+  url: 'https://nomoreparties.co/v1/cohort-64/',
+  headers: {
+    'content-type': 'application/json',
+    authorization: 'fedbf8d8-f685-4219-bcb3-9f8a312759fb'
+  }
+};

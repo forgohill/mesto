@@ -6,22 +6,11 @@ export class UserInfo {
 
   }
 
-  getServerUserInfo() {
-    fetch('https://nomoreparties.co/v1/cohort-64/users/me',
-      {
-        method: 'GET',
-        headers: {
-          authorization: 'fedbf8d8-f685-4219-bcb3-9f8a312759fb'
-        }
-      })
-      .then(res => res.json())
-      .then((data) => {
-        console.log(data);
-        this._name.textContent = data.name;
-        this._mission.textContent = data.about;
-        this._avatar.src = data.avatar;
-        this._avatar.alt = `${data.name},${data.about}`;
-      });
+  refreshUserInfo(data) {
+    this._name.textContent = data.name;
+    this._mission.textContent = data.about;
+    this._avatar.src = data.avatar;
+    this._avatar.alt = `${data.name},${data.about}`;
   }
 
   getUserInfo() {
