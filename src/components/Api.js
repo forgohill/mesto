@@ -53,6 +53,18 @@ export class Api {
         return this._checkError(res);
       })
   }
+
+  setCards(data) {
+    // const data = this._renamerUserInputApi({ inputName, inputMission });
+    return fetch(`${this._url}cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify(data)
+    })
+      .then((res) => {
+        return this._checkError(res);
+      })
+  }
 }
 
 

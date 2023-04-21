@@ -31,9 +31,30 @@ const formValidatorAddCard = new FormValidator(formValidationConfig, formCreate)
 // =================
 
 const userInfo = new UserInfo(interactionConfig);
+// СОЗДАЁМ АПИ С КОНИФГУРАЦИЕЙ
+const api = new Api(configApi);
 
+// const cardsApi = () => {
+//   api.getCards()
+//     // загрузка карточек с API
+//     // cardsApi
+//     .then((data) => {
+//       const addSectionCard = new Section(
+//         {
+//           data,
+//           renderer: (item) => {
+//             addSectionCard.addItem(createCard(item));
+//           }
+//         },
+//         interactionConfig.selectorSectionCardsWrapper
+//       );
 
-
+//       addSectionCard.renderItems();
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//     });
+// };
 
 
 const handleFormEdit = (data) => {
@@ -46,6 +67,12 @@ const handleFormAdd = (data) => {
   const item = {};
   item.name = `${data.inputFoto}`;
   item.link = `${data.inputLink}`;
+  console.log(item);
+
+
+  api.setCards(item);
+  // debugger;
+  // cardsApi();
   addSectionCard.addItem(createCard(item));
   addPopup.closePopup();
 }
@@ -76,6 +103,17 @@ const editPopup = new PopupWithForm(interactionConfig.selectorPopupEdit, handleF
 const addPopup = new PopupWithForm(interactionConfig.selectorPopupAdd, handleFormAdd);
 const popupPreview = new PopupWithImage(interactionConfig.selectorPopupPreview);
 
+const getUserInfoApi = api.getUserInfo();
+// обновление UserInfo
+getUserInfoApi
+  .then((data) => {
+    console.log(data);
+    userInfo.refreshUserInfo(data);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
 // const addSectionCard = new Section(
 //   {
 //     data: initialCards,
@@ -88,21 +126,32 @@ const popupPreview = new PopupWithImage(interactionConfig.selectorPopupPreview);
 
 // addSectionCard.renderItems();
 
-// СОЗДАЁМ АПИ С КОНИФГУРАЦИЕЙ
-const api = new Api(configApi);
+
+const addSectionCard = new Section(
+  {
+    renderer: (item) => {
+      addSectionCard.addItem(createCard(item));
+    }
+  },
+  interactionConfig.selectorSectionCardsWrapper
+);
 
 
-const getUserInfoApi = api.getUserInfo();
-// обновление UserInfo
-getUserInfoApi
+
+const cardsApi = api.getCards();
+// загрузка карточек с API
+cardsApi
   .then((data) => {
-    console.log(data);
-    userInfo.refreshUserInfo(data);
+    // console.log(data);
+    addSectionCard.renderItems(data);
   })
   .catch((err) => {
     console.error(err);
   });
 
+
+
+/*
 const cardsApi = api.getCards();
 // загрузка карточек с API
 cardsApi
@@ -122,7 +171,12 @@ cardsApi
   .catch((err) => {
     console.error(err);
   });
+*/
 
+
+
+
+// cardsApi();
 // userInfo.getServerUserInfo();
 
 // =================
