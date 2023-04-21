@@ -32,7 +32,12 @@ const formValidatorAddCard = new FormValidator(formValidationConfig, formCreate)
 
 const userInfo = new UserInfo(interactionConfig);
 
+
+
+
+
 const handleFormEdit = (data) => {
+  api.patchUserInfo(data); // отправляем на сервер Имя и Проффессию
   userInfo.setUserInfo(data);
   editPopup.closePopup();
 }
@@ -87,9 +92,9 @@ const popupPreview = new PopupWithImage(interactionConfig.selectorPopupPreview);
 const api = new Api(configApi);
 
 
-const userInfoApi = api.getUserInfo();
+const getUserInfoApi = api.getUserInfo();
 // обновление UserInfo
-userInfoApi
+getUserInfoApi
   .then((data) => {
     console.log(data);
     userInfo.refreshUserInfo(data);
@@ -99,6 +104,7 @@ userInfoApi
   });
 
 const cardsApi = api.getCards();
+// загрузка карточек с API
 cardsApi
   .then((data) => {
     const addSectionCard = new Section(
