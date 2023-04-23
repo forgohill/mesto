@@ -65,8 +65,17 @@ export class Api {
         return this._checkError(res);
       })
   }
+
+  getLikes() {
+    return fetch(`${this._url}cards`, {
+      method: "GET",
+      headers: this._headers
+    })
+      .then((res) => {
+        return this._checkError(res);
+      })
+  }
+
+
+
 }
-
-
-
-// `${this._url}me`

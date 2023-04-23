@@ -107,7 +107,7 @@ const getUserInfoApi = api.getUserInfo();
 // обновление UserInfo
 getUserInfoApi
   .then((data) => {
-    console.log(data);
+    // console.log(data);
     userInfo.refreshUserInfo(data);
   })
   .catch((err) => {
@@ -130,6 +130,7 @@ getUserInfoApi
 const addSectionCard = new Section(
   {
     renderer: (item) => {
+      // console.log(item);
       addSectionCard.addItem(createCard(item));
     }
   },
@@ -144,6 +145,29 @@ cardsApi
   .then((data) => {
     // console.log(data);
     addSectionCard.renderItems(data);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+
+
+const likesApi = api.getLikes();
+likesApi
+  .then((data) => {
+    // console.log(data);
+    const newArr = data.map((item) => {
+      return item.likes.length;
+    });
+
+    data.forEach((item) => {
+      return item.likes.length;
+    });
+
+    // console.log(data);
+    // console.log(newArr);
+
+    // addSectionCard.renderItems(data);
   })
   .catch((err) => {
     console.error(err);
