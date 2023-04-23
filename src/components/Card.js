@@ -3,6 +3,7 @@ export class Card {
     this._date = date;
     this._template = template.content;
     this._handleCardClick = handleCardClick;
+
   }
 
   _handlerLike() {
@@ -42,6 +43,9 @@ export class Card {
     this._cardImage.src = this._date.link;
     this._cardImage.alt = this._date.name;
 
+    this._likes = this._template.querySelector('.cards__counter-like');
+
+    this._likes.textContent = this._date.likes.length;
 
 
     return this._elementCard;
