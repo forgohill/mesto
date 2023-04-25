@@ -118,6 +118,38 @@
   </div>
 
 
+  <!-- УДАЛИТЬ КАРТОЧКУ -->
+  <!-- popup_opened -->
+  <div class="popup popup_trash">
+    <div class="popup__container">
+      <h2 class="popup__title">Вы уверены?</h2>
+
+      <form class="popup__form popup__form_trash" name="popupForm" method="post" novalidate>
+        <!--
+        <input id="name" type="text" minlength="2" maxlength="40" name="inputName" placeholder="Имя"
+          class="popup__input popup__input_name" required>
+
+        <span class="popup__error popup__error_name">
+
+        </span>
+
+        <input id="mission" type="text" minlength="2" maxlength="200" name="inputMission" placeholder="О себе"
+          class="popup__input popup__input_mission" required>
+
+        <span class="popup__error popup__error_mission">
+
+        </span>
+ -->
+        <button type="submit" aria-label="Удалить карарточку с картинкой" class="popup__submit">
+          Да
+        </button>
+
+      </form>
+      <button type="button" name="button-close" aria-label="Закрыть окно"
+        class="popup__close popup__close_delete links"></button>
+    </div>
+  </div>
+
   <template id="template">
     <article class="grid-places__cards cards">
       <img alt="Место загруженное пользователем" class="cards__image">
