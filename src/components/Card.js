@@ -54,7 +54,7 @@ export class Card {
     // });
 
     this._trashButton.addEventListener('click', () => {
-      this._buttonTrashCards(this);
+      this._buttonTrashCards(this, this._id);
     });
 
 
@@ -70,7 +70,7 @@ export class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
 
-    console.log(this._owner);
+
     // this._cardImage.src = this._date.link;
     // this._cardImage.alt = this._date.name;
 
@@ -78,7 +78,17 @@ export class Card {
 
     // this._likes.textContent = this._date.likes.length;
     // console.log(this._myId);
+    // console.log(this._owner);
+    // console.log(this._myId);
+    if (this._owner._id === this._myId._id) {
+      // console.log('ОП НИХУЯ=============================================');
+      return this._elementCard;
+    } else {
+      this._trashButton.style.display = 'none';
+      // console.log('ОП ПИЗДЕЦ');
+      return this._elementCard;
+    }
 
-    return this._elementCard;
+    // return this._elementCard;
   }
 }

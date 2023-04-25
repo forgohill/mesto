@@ -12,9 +12,11 @@ export class PopupConfirmDelete extends Popup {
 
   _disableSubmit(evt) { evt.preventDefault(); }
 
-  openPopup(card) {
+  openPopup(card, cardId) {
     super.openPopup();
     this._card = card;
+    this._cardId = cardId;
+    console.log(this._cardId);
     // this._popupImage.src = link;
     // this._popupImage.alt = name.textContent;
     // this._popupTitle.textContent = name.textContent;
@@ -27,7 +29,7 @@ export class PopupConfirmDelete extends Popup {
       this._disableSubmit(evt);
 
       console.log('сабмит');
-      this._submitForm(this._card);
+      this._submitForm(this._card, this._cardId);
       // this._submitForm(this._getInputValues());
     });
     // super.setEventListeners();

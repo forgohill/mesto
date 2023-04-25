@@ -112,15 +112,18 @@ const handleCardClick = (name, link) => {
   popupPreview.openPopup(name, link);
 };
 
-const handleDeleteForm = (card) => {
+const handleDeleteForm = (card, cardId) => {
   console.log(card);
+  console.log(cardId);
   // debugger;
-  deleteCard(card);
+  // deleteCard(card);
+  deleteCardApi(card, cardId);
 };
 
-const buttonTrashCards = (card) => {
+const buttonTrashCards = (card, cardId) => {
   console.log('DELETE MUTHER FUCKER');
-  popupConfirmDelete.openPopup(card);
+  console.log(cardId);
+  popupConfirmDelete.openPopup(card, cardId);
   popupConfirmDelete.deleteEventListeners();
 }
 
@@ -234,6 +237,16 @@ const setCardsApi = (data) => {
     });
 }
 
+const deleteCardApi = (card, cardId) => {
+  api.deleteCard(cardId)
+    .then(() => {
+      card.deleteCard();
+      popupConfirmDelete.closePopup(card);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
 
 /*
 const cardsApi = api.getCards();
