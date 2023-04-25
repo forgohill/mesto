@@ -12,11 +12,11 @@ export class Section {
     this._contaner.prepend(element);
   }
 
-  renderItems = (data) => {
+  renderItems = (data, myId) => {
     // debugger;
     this._renderedItems = data;
     this._renderedItems.reverse().forEach(item => {
-      this._renderer(item);
+      this._renderer(item, myId);
     });
   }
 }

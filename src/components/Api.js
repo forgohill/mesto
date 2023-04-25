@@ -54,7 +54,7 @@ export class Api {
       })
   }
 
-  setCards(data) {
+  setCard(data) {
     // const data = this._renamerUserInputApi({ inputName, inputMission });
     return fetch(`${this._url}cards`, {
       method: 'POST',
@@ -76,6 +76,15 @@ export class Api {
       })
   }
 
-
+  deleteCard(cardId) {
+    return fetch(`${this._url}cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers,
+      // body: JSON.stringify(data)
+    })
+      .then((res) => {
+        return this._checkError(res);
+      })
+  }
 
 }
