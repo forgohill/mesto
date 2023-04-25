@@ -10,6 +10,7 @@ import {
   buttonAdd,
   formEdit,
   formCreate,
+  formTrash,
   template,
   formValidationConfig,
   interactionConfig,
@@ -17,6 +18,7 @@ import {
 } from "../utils/constants.js";
 
 import { Section } from '../components/Section.js';
+import { PopupConfirmDelete } from "../components/PopupConfirmDelete.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { UserInfo } from "../components/UserInfo.js";
@@ -89,19 +91,43 @@ const clickAdd = () => {
   formValidatorAddCard.resetValidation();
   addPopup.openPopup();
 }
+
 const createCard = (item) => {
-  const card = new Card(item, template, handleCardClick);
+  const card = new Card(item,
+    template,
+    handleCardClick,
+    buttonTrashCards);
   const elementCard = card.returnCard();
   return elementCard;
+};
+
+const deleteCard = (card) => {
+  card.deleteCard();
+  popupConfirmDelete.closePopup(card);
 };
 
 const handleCardClick = (name, link) => {
   popupPreview.openPopup(name, link);
 };
 
+const handleDeleteForm = (card) => {
+  console.log(card);
+  // debugger;
+  deleteCard(card);
+};
+
+const buttonTrashCards = (card) => {
+  console.log('DELETE MUTHER FUCKER');
+  popupConfirmDelete.openPopup(card);
+  popupConfirmDelete.deleteEventListeners();
+}
+
+
 const editPopup = new PopupWithForm(interactionConfig.selectorPopupEdit, handleFormEdit);
 const addPopup = new PopupWithForm(interactionConfig.selectorPopupAdd, handleFormAdd);
 const popupPreview = new PopupWithImage(interactionConfig.selectorPopupPreview);
+
+const popupConfirmDelete = new PopupConfirmDelete(interactionConfig.selectorPopupTrash, handleDeleteForm);
 
 const getUserInfoApi = api.getUserInfo();
 // обновление UserInfo
@@ -175,6 +201,7 @@ likesApi
 
 
 
+
 /*
 const cardsApi = api.getCards();
 // загрузка карточек с API
@@ -211,6 +238,8 @@ cardsApi
 editPopup.setEventListeners();
 addPopup.setEventListeners();
 popupPreview.setEventListeners();
+
+popupConfirmDelete.setEventListeners();
 
 
 buttonEdit.addEventListener('click', clickEdit);
