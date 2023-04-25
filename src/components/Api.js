@@ -54,7 +54,7 @@ export class Api {
       })
   }
 
-  setCards(data) {
+  setCard(data) {
     // const data = this._renamerUserInputApi({ inputName, inputMission });
     return fetch(`${this._url}cards`, {
       method: 'POST',
