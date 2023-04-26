@@ -65,16 +65,39 @@ export class Api {
         return this._checkError(res);
       })
   }
-
-  getLikes() {
-    return fetch(`${this._url}cards`, {
-      method: "GET",
-      headers: this._headers
+  putLikeCard(likeId) {
+    return fetch(`${this._url}cards/${likeId}/likes`, {
+      method: 'PUT',
+      headers: this._headers,
+      // body: JSON.stringify(data)
     })
       .then((res) => {
         return this._checkError(res);
       })
   }
+
+  deleteLikeCard(likeId) {
+    return fetch(`${this._url}cards/${likeId}/likes`, {
+      method: 'DELETE',
+      headers: this._headers,
+      // body: JSON.stringify(data)
+    })
+      .then((res) => {
+        return this._checkError(res);
+      })
+  }
+
+  /*
+    getLikes() {
+      return fetch(`${this._url}cards`, {
+        method: "GET",
+        headers: this._headers
+      })
+        .then((res) => {
+          return this._checkError(res);
+        })
+    }
+  */
 
   deleteCard(cardId) {
     return fetch(`${this._url}cards/${cardId}`, {
@@ -87,4 +110,25 @@ export class Api {
       })
   }
 
+
 }
+
+
+
+// likeCards(likeId) {
+//   return fetch(`${this._baseUrl}/cards/likes/${likeId}`, {
+//     method: "PUT",
+//     headers: {
+//       authorization: this._authorization,
+//     },
+//   }).then((res) => this._getResponseData(res));
+// }
+
+// dislikeCards(likeId) {
+//   return fetch(`${this._baseUrl}/cards/likes/${likeId}`, {
+//     method: "DELETE",
+//     headers: {
+//       authorization: this._authorization,
+//     },
+//   }).then((res) => this._getResponseData(res));
+// }
