@@ -97,8 +97,10 @@ const createCard = (item, myId) => {
   const card = new Card(item,
     template,
     handleCardClick,
-    buttonTrashCards
-    , myId);
+    putLikeCard,
+    deleteLikeCard,
+    buttonTrashCards,
+    myId);
   const elementCard = card.returnCard();
   return elementCard;
 };
@@ -199,7 +201,7 @@ const initialLoadingCardsAndUserInfo = () => {
 }
 
 
-
+/*
 const likesApi = api.getLikes();
 
 
@@ -222,7 +224,7 @@ likesApi
   .catch((err) => {
     console.error(err);
   });
-
+*/
 
 const setCardsApi = (data) => {
   // console.log(item);
@@ -248,6 +250,29 @@ const deleteCardApi = (card, cardId) => {
     });
 };
 
+
+const putLikeCard = (card, likeId) => {
+  api.putLikeCard(likeId)
+    .then((data) => {
+      card.changeLikes(data.likes);
+      // card.renameCounterLikes(data.likes);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+
+}
+
+const deleteLikeCard = (card, likeId) => {
+  api.deleteLikeCard(likeId)
+    .then((data) => {
+      card.changeLikes(data.likes);
+      // card.renameCounterLikes(data.likes);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
 /*
 const cardsApi = api.getCards();
 // загрузка карточек с API
