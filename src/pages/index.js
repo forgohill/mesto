@@ -40,28 +40,6 @@ const userInfo = new UserInfo(interactionConfig);
 // СОЗДАЁМ АПИ С КОНИФГУРАЦИЕЙ
 const api = new Api(configApi);
 
-// const cardsApi = () => {
-//   api.getCards()
-//     // загрузка карточек с API
-//     // cardsApi
-//     .then((data) => {
-//       const addSectionCard = new Section(
-//         {
-//           data,
-//           renderer: (item) => {
-//             addSectionCard.addItem(createCard(item));
-//           }
-//         },
-//         interactionConfig.selectorSectionCardsWrapper
-//       );
-
-//       addSectionCard.renderItems();
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//     });
-// };
-
 
 const handleFormEdit = (data) => {
   api.patchUserInfo(data); // отправляем на сервер Имя и Проффессию
@@ -70,18 +48,7 @@ const handleFormEdit = (data) => {
 }
 
 const handleFormAdd = (data) => {
-  // const item = {};
-  // item.name = `${data.inputFoto}`;
-  // item.link = `${data.inputLink}`;
-  // console.log(item);
-
-
-  // api.setCard(item);
   setCardsApi(data);
-  // debugger;
-  // cardsApi();
-  // addSectionCard.addItem(createCard(item));
-  // addPopup.closePopup();
 }
 
 const handleFormAvatar = (avatarLink) => {
@@ -134,8 +101,7 @@ const handleCardClick = (name, link) => {
 const handleDeleteForm = (card, cardId) => {
   console.log(card);
   console.log(cardId);
-  // debugger;
-  // deleteCard(card);
+
   deleteCardApi(card, cardId);
 };
 
@@ -161,7 +127,7 @@ const popupConfirmDelete = new PopupConfirmDelete(interactionConfig.selectorPopu
 const addSectionCard = new Section(
   {
     renderer: (item, myId) => {
-      // console.log(item);
+
       addSectionCard.addItem(createCard(item, myId));
     }
   },
@@ -171,49 +137,11 @@ const addSectionCard = new Section(
 
 
 
-// const getUserInfoApi = api.getUserInfo();
-// обновление UserInfo
-// getUserInfoApi
-//   .then((data) => {
-//     // console.log(data);
-//     userInfo.refreshUserInfo(data);
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//   });
-
-// const addSectionCard = new Section(
-//   {
-//     data: initialCards,
-//     renderer: (item) => {
-//       addSectionCard.addItem(createCard(item));
-//     }
-//   },
-//   interactionConfig.selectorSectionCardsWrapper
-// );
-
-// addSectionCard.renderItems();
-
-// const getCardsApi = api.getCards();
-
-// загрузка карточек с API
-// cardsApi
-//   .then((data) => {
-//     // console.log(data);
-//     addSectionCard.renderItems(data, myId);
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//   });
-
-
 const initialLoadingCardsAndUserInfo = () => {
   Promise.all([api.getUserInfo(),
   api.getCards()])
     .then((data) => {
       userInfo.refreshUserInfo(data[0]);
-
-      // console.log(data[0])// debugger;
       addSectionCard.renderItems(data[1], data[0]);
     })
     .catch((err) => {
@@ -221,31 +149,6 @@ const initialLoadingCardsAndUserInfo = () => {
     })
 }
 
-
-/*
-const likesApi = api.getLikes();
-
-
-likesApi
-  .then((data) => {
-    // console.log(data);
-    const newArr = data.map((item) => {
-      return item.likes.length;
-    });
-
-    data.forEach((item) => {
-      return item.likes.length;
-    });
-
-    // console.log(data);
-    // console.log(newArr);
-
-    // addSectionCard.renderItems(data);
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-*/
 
 const setCardsApi = (data) => {
   // console.log(item);
@@ -276,7 +179,6 @@ const putLikeCard = (card, likeId) => {
   api.putLikeCard(likeId)
     .then((data) => {
       card.changeLikes(data.likes);
-      // card.renameCounterLikes(data.likes);
     })
     .catch((err) => {
       console.error(err);
@@ -288,7 +190,6 @@ const deleteLikeCard = (card, likeId) => {
   api.deleteLikeCard(likeId)
     .then((data) => {
       card.changeLikes(data.likes);
-      // card.renameCounterLikes(data.likes);
     })
     .catch((err) => {
       console.error(err);
@@ -300,44 +201,14 @@ const patchAvatar = (avatarLink) => {
   api.patchAvatar(avatarLink)
   .then((data) => {
 
-  console.log(data)
+
     userInfo.refreshUserInfo(data);
 
-    // ard.changeLikes(data.likes);
-    // card.renameCounterLikes(data.likes);
   })
   .catch((err) => {
     console.error(err);
   });
 }
-
-/*
-const cardsApi = api.getCards();
-// загрузка карточек с API
-cardsApi
-  .then((data) => {
-    const addSectionCard = new Section(
-      {
-        data,
-        renderer: (item) => {
-          addSectionCard.addItem(createCard(item));
-        }
-      },
-      interactionConfig.selectorSectionCardsWrapper
-    );
-
-    addSectionCard.renderItems();
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-*/
-
-
-
-
-// cardsApi();
-// userInfo.getServerUserInfo();
 
 // =================
 // ================= БЛОК СЛУШАТЕЛЕЙ СОБЫТИЙ =======================
