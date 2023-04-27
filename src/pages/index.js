@@ -5,11 +5,13 @@ import { FormValidator } from "../components/FormValidator.js";
 
 import {
   buttonEdit,
+  buttonAvatar,
   inputName,
   inputMission,
   buttonAdd,
   formEdit,
   formCreate,
+  formAvatar,
   formTrash,
   template,
   formValidationConfig,
@@ -27,6 +29,8 @@ import { data } from 'autoprefixer';
 // валидатор формы
 const formValidatorEditProfile = new FormValidator(formValidationConfig, formEdit);
 const formValidatorAddCard = new FormValidator(formValidationConfig, formCreate);
+// валидация формы попап аватара
+const formValidatorAvatar = new FormValidator(formValidationConfig, formAvatar);
 
 // =================
 // ================= БЛОК ЭКЗЕМПЛЯРОВ ОБРАБОТЧИКОВ=======================
@@ -80,6 +84,12 @@ const handleFormAdd = (data) => {
   // addPopup.closePopup();
 }
 
+const handleFormAvatar = (avatarLink) => {
+console.log(avatarLink);
+patchAvatar(avatarLink);
+avatarPopup.closePopup();
+}
+
 const clickEdit = () => {
   const data = userInfo.getUserInfo();
   inputName.value = data.name;
@@ -87,6 +97,13 @@ const clickEdit = () => {
   formValidatorEditProfile.resetValidation();
   editPopup.openPopup();
 }
+
+const clickAvatar = () => {
+  console.log('clickAvatar');
+  formValidatorAvatar.resetValidation();
+  avatarPopup.openPopup();
+}
+
 
 const clickAdd = () => {
   formValidatorAddCard.resetValidation();
@@ -132,7 +149,11 @@ const buttonTrashCards = (card, cardId) => {
 
 const editPopup = new PopupWithForm(interactionConfig.selectorPopupEdit, handleFormEdit);
 const addPopup = new PopupWithForm(interactionConfig.selectorPopupAdd, handleFormAdd);
+const avatarPopup = new PopupWithForm(interactionConfig.selectorPopupAvatar, handleFormAvatar);
+
 const popupPreview = new PopupWithImage(interactionConfig.selectorPopupPreview);
+
+
 
 const popupConfirmDelete = new PopupConfirmDelete(interactionConfig.selectorPopupTrash, handleDeleteForm);
 
@@ -273,6 +294,23 @@ const deleteLikeCard = (card, likeId) => {
       console.error(err);
     });
 }
+
+
+const patchAvatar = (avatarLink) => {
+  api.patchAvatar(avatarLink)
+  .then((data) => {
+
+  console.log(data)
+    userInfo.refreshUserInfo(data);
+
+    // ard.changeLikes(data.likes);
+    // card.renameCounterLikes(data.likes);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+}
+
 /*
 const cardsApi = api.getCards();
 // загрузка карточек с API
@@ -311,13 +349,16 @@ initialLoadingCardsAndUserInfo();
 editPopup.setEventListeners();
 addPopup.setEventListeners();
 popupPreview.setEventListeners();
+avatarPopup.setEventListeners();
+
 
 popupConfirmDelete.setEventListeners();
 
 
 buttonEdit.addEventListener('click', clickEdit);
 buttonAdd.addEventListener('click', clickAdd);
-
+buttonAvatar.addEventListener('click', clickAvatar);
 
 formValidatorEditProfile.enableValidation();
 formValidatorAddCard.enableValidation();
+formValidatorAvatar.enableValidation();

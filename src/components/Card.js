@@ -77,7 +77,7 @@ export class Card {
 
   }
 
-  // удалить картточку
+  // удалить карточку
   deleteCard() {
     this._elementCard.remove();
     this._elementCard = null;

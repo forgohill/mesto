@@ -21,6 +21,12 @@ export class Api {
     return data;
   }
 
+_renamerAvatarLink({avatarLink}) {
+const data = {};
+data.avatar = avatarLink;
+return data;
+}
+
   getUserInfo() {
     return fetch(`${this._url}users/me`, {
       method: "GET",
@@ -86,6 +92,23 @@ export class Api {
         return this._checkError(res);
       })
   }
+
+
+
+  patchAvatar(avatarLink) {
+      const data = this._renamerAvatarLink(avatarLink);
+      return fetch(`${this._url}users/me/avatar`, {
+        method: 'PATCH',
+        headers: this._headers,
+        body: JSON.stringify(data)
+      })
+        .then((res) => {
+          return this._checkError(res);
+        })
+    }
+
+
+
 
   /*
     getLikes() {
