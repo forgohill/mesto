@@ -6,7 +6,7 @@ export class Card {
     handleCardClick, // включатель попапИмейдж
     putLikeCard, // отправляем лайк на сервер
     deleteLikeCard, // удаляем лайк с сервера
-    buttonTrashCards,
+    handleTrashCards,
     myId) {
     this._name = name; // имя карточки
     this._link = link; // ссылка картинки
@@ -23,7 +23,7 @@ export class Card {
     this._putLike = putLikeCard; // отправляем лайк на сервер
     this._deleteLike = deleteLikeCard; // удаляем лайк с сервера
 
-    this._buttonTrashCards = buttonTrashCards; // нажатие на корзину
+    this._handleTrashCards = handleTrashCards; // нажатие на корзину
     this._myId = myId; // объект в котором есть мой ID
   }
 
@@ -32,12 +32,6 @@ export class Card {
     const arrayIdLike = likes.map((element) => {
       return element._id;
     })
-    console.log(arrayIdLike);
-    console.log(
-      arrayIdLike.some((element) => {
-        return element === this._myId._id;
-      })
-    )
 
     if (arrayIdLike.some((element) => {
       return element === this._myId._id;
@@ -59,22 +53,18 @@ export class Card {
   // покрасить лайк
   _paintLike(likes) {
     if (this._verificationLike(likes)) {
-      console.log('true');
       this._likeButton.classList.add('cards__btn-like_active');
     } else {
-      console.log('false');
       this._likeButton.classList.remove('cards__btn-like_active');
     }
   }
 
   // изменить состояние лайка
   changeLikes(likes) {
-    console.log(likes);
     this._counterLikes = likes;
     this._sumLikes = this._counterLikes.length;
     this._likeDisplay.textContent = this._sumLikes;
     this._paintLike(likes);
-
   }
 
   // удалить карточку
@@ -100,7 +90,7 @@ export class Card {
     });
 
     this._trashButton.addEventListener('click', () => {
-      this._buttonTrashCards(this, this._id);
+      this._handleTrashCards(this, this._id);
     });
 
     this._cardImage.addEventListener('click', () => {
@@ -115,22 +105,12 @@ export class Card {
     this._elementCard.querySelector('.cards__title').textContent = this._name;
     this._likeDisplay = this._elementCard.querySelector('.cards__counter-like');
 
-    // this.changeLikes(this._counterLikes);
     this._paintLike(this._counterLikes);
 
-    // debugger;
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
 
-    console.log(this._name);
-    console.log(this._likeDisplay.textContent);
-    console.log(this._lengthCounterLikes);
-
     this._likeDisplay.textContent = this._lengthCounterLikes;
-    console.log(this._likeDisplay.textContent);
-
-    console.log('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
-
 
     // отключаем корзину на чужих краточках
     if (this._owner._id === this._myId._id) {
@@ -139,6 +119,5 @@ export class Card {
       this._trashButton.style.display = 'none';
       return this._elementCard;
     }
-    // return this._elementCard;
   }
 }

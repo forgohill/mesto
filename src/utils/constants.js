@@ -14,9 +14,6 @@ export const formAvatar = document.querySelector('.popup__form_avatar');
 
 // форма в попапе добавить карточку
 export const formCreate = document.querySelector('.popup__form_add');
-// форма в попапе удалить карточку
-export const formTrash = document.querySelector('.popup__form_trash');
-
 
 // оболочка для импорта карточек
 export const template = document.querySelector('#template');
@@ -37,7 +34,7 @@ export const interactionConfig = {
   selectorAvatar: '.profile__avatar',
   selectorPopupEdit: '.popup_edit',
   selectorPopupAdd: '.popup_add',
-  selectorPopupAvatar:'.popup_avatar',
+  selectorPopupAvatar: '.popup_avatar',
   selectorPopupPreview: '.popup_preview',
   selectorPopupTrash: '.popup_trash',
   selectorSectionCardsWrapper: '.grid-places',

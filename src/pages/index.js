@@ -1,8 +1,6 @@
 import './index.css';
-// import { initialCards } from "../utils/cards.js";
-import { Card } from "../components/Card.js";
-import { FormValidator } from "../components/FormValidator.js";
 
+// ИМПОРТ КОНСТАНТ
 import {
   buttonEdit,
   buttonAvatar,
@@ -12,20 +10,23 @@ import {
   formEdit,
   formCreate,
   formAvatar,
-  formTrash,
   template,
   formValidationConfig,
   interactionConfig,
   configApi
 } from "../utils/constants.js";
 
+// ИМПОРТ КЛАССОВ
+import { Card } from "../components/Card.js";
 import { Section } from '../components/Section.js';
+import { FormValidator } from "../components/FormValidator.js";
 import { PopupConfirmDelete } from "../components/PopupConfirmDelete.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { Api } from '../components/Api.js'
 import { data } from 'autoprefixer';
+
 // валидатор формы
 const formValidatorEditProfile = new FormValidator(formValidationConfig, formEdit);
 const formValidatorAddCard = new FormValidator(formValidationConfig, formCreate);
@@ -36,31 +37,30 @@ const formValidatorAvatar = new FormValidator(formValidationConfig, formAvatar);
 // ================= БЛОК ЭКЗЕМПЛЯРОВ ОБРАБОТЧИКОВ=======================
 // =================
 
+// СОЗДАЕМ ОБРАБОТЧИК ПРОФИЛЯ
 const userInfo = new UserInfo(interactionConfig);
 // СОЗДАЁМ АПИ С КОНИФГУРАЦИЕЙ
 const api = new Api(configApi);
 
-
+// ОБРАБОТЧИК формы редактировать профиль
 const handleFormEdit = (data) => {
-
   patchUserInfo(data);
-  // api.patchUserInfo(data); // отправляем на сервер Имя и Проффессию
-
-  // userInfo.setUserInfo(data);
-  // userInfo.refreshUserInfo(data);
   editPopup.closePopup();
 }
 
+// ОБРАБОТЧИК формы добавления карточки
 const handleFormAdd = (data) => {
   setCardsApi(data);
 }
 
+// ОБРАБОТЧИК формы редактирования аватара
 const handleFormAvatar = (avatarLink) => {
   console.log(avatarLink);
   patchAvatar(avatarLink);
   avatarPopup.closePopup();
 }
 
+// ОТКРЫТИЕ попап редактировать профиль
 const clickEdit = () => {
   const data = userInfo.getUserInfo();
   inputName.value = data.name;
@@ -69,65 +69,64 @@ const clickEdit = () => {
   editPopup.openPopup();
 }
 
+// ОТКРЫТИЕ попап редактировать аватар
 const clickAvatar = () => {
   console.log('clickAvatar');
   formValidatorAvatar.resetValidation();
   avatarPopup.openPopup();
 }
 
-
+// ОТКРЫТИЕ попап добавить карточку
 const clickAdd = () => {
   formValidatorAddCard.resetValidation();
   addPopup.openPopup();
 }
 
+// СОЗДАНИЕ новой карточки
 const createCard = (item, myId) => {
   const card = new Card(item,
     template,
     handleCardClick,
     putLikeCard,
     deleteLikeCard,
-    buttonTrashCards,
+    handleTrashCards,
     myId);
   const elementCard = card.returnCard();
   return elementCard;
 };
 
+
+// ???
 const deleteCard = (card) => {
   card.deleteCard();
   popupConfirmDelete.closePopup(card);
 };
 
+// ОБРАБОТЧИК запуск привью при клике на карточку
 const handleCardClick = (name, link) => {
   popupPreview.openPopup(name, link);
 };
 
-const handleDeleteForm = (card, cardId) => {
-  console.log(card);
-  console.log(cardId);
 
+// ОБРАБОТЧИК отправка на сервер команды DELETE
+const handleDeleteForm = (card, cardId) => {
   deleteCardApi(card, cardId);
 };
 
-const buttonTrashCards = (card, cardId) => {
-  console.log('DELETE MUTHER FUCKER');
-  console.log(cardId);
+// ОБРАБОТЧИК нажатие на кнопку корзина
+const handleTrashCards = (card, cardId) => {
   popupConfirmDelete.openPopup(card, cardId);
   popupConfirmDelete.deleteEventListeners();
 }
 
-
+// БЛОК СОЗДАНИЯ ПОПАПов
 const editPopup = new PopupWithForm(interactionConfig.selectorPopupEdit, handleFormEdit);
 const addPopup = new PopupWithForm(interactionConfig.selectorPopupAdd, handleFormAdd);
 const avatarPopup = new PopupWithForm(interactionConfig.selectorPopupAvatar, handleFormAvatar);
-
 const popupPreview = new PopupWithImage(interactionConfig.selectorPopupPreview);
-
-
-
 const popupConfirmDelete = new PopupConfirmDelete(interactionConfig.selectorPopupTrash, handleDeleteForm);
 
-
+// СОЗДАНИЕ класса Секция , слой для введения карточек в body
 const addSectionCard = new Section(
   {
     renderer: (item, myId) => {
@@ -138,9 +137,7 @@ const addSectionCard = new Section(
   interactionConfig.selectorSectionCardsWrapper
 );
 
-
-
-
+// ЗАПУСК ИНИЦИАЛИЗАЦИИ ИНФОРМАЦИИ С СЕРВЕРА
 const initialLoadingCardsAndUserInfo = () => {
   Promise.all([api.getUserInfo(),
   api.getCards()])
@@ -153,6 +150,7 @@ const initialLoadingCardsAndUserInfo = () => {
     })
 }
 
+// ОБРАБОТКА ОТПРАВКИ ЮЗЕРИНФО НА СЕРВЕР
 const patchUserInfo = (data) => {
   editPopup.loadingProcess(true, 'Сохранить...')
   api.patchUserInfo(data)
@@ -164,24 +162,14 @@ const patchUserInfo = (data) => {
     })
     .finally(() => {
       editPopup.loadingProcess(false);
-      // loadingProcessUserInfo(editPopup);
-      // console.log('грузиловоЮзерИнфо');
     });
 }
 
-// const loadingProcessUserInfo = (popup) => {
-//   console.log('грузилово')
-//   console.log(popup);
-//   // editPopup.loadingProcess();
-//   popup.loadingProcess(false);
-// }
-
+// ОБРАБОТКА ОТПРАВКИ НОВОЙ КАРТОЧКИ НА СЕРВЕР
 const setCardsApi = (data) => {
   addPopup.loadingProcess(true, 'Загрузка...');
-  // console.log(item);
   api.setCard({ name: data.inputFoto, link: data.inputLink })
     .then((data) => {
-      console.log(data);
       addSectionCard.addItem(createCard(data, data.owner));
       addPopup.closePopup();
     })
@@ -193,6 +181,7 @@ const setCardsApi = (data) => {
     });
 }
 
+// ОБРАБОТКА ОТПРАВКИ НОВОЙ КАРТОЧКИ НА СЕРВЕР
 const deleteCardApi = (card, cardId) => {
   popupConfirmDelete.loadingProcess(true, 'Удаление...');
   api.deleteCard(cardId)
@@ -208,7 +197,7 @@ const deleteCardApi = (card, cardId) => {
     });
 };
 
-
+// ОБРАБОТКА ОТПРАВКА НА СЕРВЕР ИНФОРМАЦИИ О ТО ЧТО УСТАНОВИЛИ ЛАЙК
 const putLikeCard = (card, likeId) => {
   api.putLikeCard(likeId)
     .then((data) => {
@@ -220,6 +209,7 @@ const putLikeCard = (card, likeId) => {
 
 }
 
+// ОБРАБОТКА ОТПРАВКА НА СЕРВЕР ИНФОРМАЦИИ О ТО ЧТО УБРАЛИ ЛАЙК
 const deleteLikeCard = (card, likeId) => {
   api.deleteLikeCard(likeId)
     .then((data) => {
@@ -230,15 +220,12 @@ const deleteLikeCard = (card, likeId) => {
     });
 }
 
-
+// ОБРАБОТКА ОТПРАВКА НА СЕРВЕР ОБНОВЛЕНИЯ АВАТАРКИ
 const patchAvatar = (avatarLink) => {
   avatarPopup.loadingProcess(true, 'Сохранение...');
   api.patchAvatar(avatarLink)
     .then((data) => {
-
-
       userInfo.refreshUserInfo(data);
-
     })
     .catch((err) => {
       console.error(err);
@@ -248,19 +235,16 @@ const patchAvatar = (avatarLink) => {
     });
 }
 
+// ИНИЦИАЛИЗИРУЕМ КАРТОЧКИ И ЮЗЕРИНФО С СЕРВЕРА
+initialLoadingCardsAndUserInfo();
+
 // =================
 // ================= БЛОК СЛУШАТЕЛЕЙ СОБЫТИЙ =======================
 // =================
-
-initialLoadingCardsAndUserInfo();
-
-
 editPopup.setEventListeners();
 addPopup.setEventListeners();
 popupPreview.setEventListeners();
 avatarPopup.setEventListeners();
-
-
 popupConfirmDelete.setEventListeners();
 
 
@@ -268,6 +252,10 @@ buttonEdit.addEventListener('click', clickEdit);
 buttonAdd.addEventListener('click', clickAdd);
 buttonAvatar.addEventListener('click', clickAvatar);
 
+
+// ВКЛЮЧАЕМ ВАЛИАДЦИЮ НА ПОПОПАПА У КОТОРЫХ ЕСТЬ ИНПУТЫ
 formValidatorEditProfile.enableValidation();
 formValidatorAddCard.enableValidation();
 formValidatorAvatar.enableValidation();
+
+

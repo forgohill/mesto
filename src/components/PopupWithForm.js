@@ -14,11 +14,6 @@ export class PopupWithForm extends Popup {
 
   _disableSubmit(evt) { evt.preventDefault(); }
 
-  // _saveStartNameSubmit() {
-  //   this._startNameSubmit = this._buttonSubmit.textContent;
-  //   // return saveStartNameSubmit;
-  // }
-
   loadingProcess(startLoading, message) {
 
     if (startLoading) {
@@ -26,11 +21,6 @@ export class PopupWithForm extends Popup {
     } else {
       this._buttonSubmit.textContent = this._startNameSubmit;
     }
-
-    // console.log(this._startNameSubmit);
-    // this._buttonSubmit.textContent = 'Сохранение...';
-    // console.log(this._startNameSubmit);
-    // console.log(this._buttonSubmit);
   }
 
   _getInputValues() {
@@ -38,8 +28,6 @@ export class PopupWithForm extends Popup {
     this._inputList.forEach(item => {
       inputValues[item.name] = item.value;
     });
-
-    console.log(inputValues);
     return inputValues;
   }
 
@@ -50,15 +38,9 @@ export class PopupWithForm extends Popup {
     });
     super.setEventListeners();
   }
-  // openPopup() {
-  //   this._saveStartNameSubmit();
-  //   super.openPopup();
-  // }
 
   closePopup() {
     this._popupForm.reset();
-    console.log(this._startNameSubmit);
-    // this._buttonSubmit.textContent = this._startNameSubmit;
     console.log(this._buttonSubmit);
     super.closePopup();
   }
