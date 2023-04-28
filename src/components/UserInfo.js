@@ -1,8 +1,16 @@
 export class UserInfo {
-  constructor({ selectorName, selectorMission }) {
+  constructor({ selectorName, selectorMission, selectorAvatar }) {
     this._name = document.querySelector(selectorName);
     this._mission = document.querySelector(selectorMission);
+    this._avatar = document.querySelector(selectorAvatar);
 
+  }
+
+  refreshUserInfo(data) {
+    this._name.textContent = data.name;
+    this._mission.textContent = data.about;
+    this._avatar.src = data.avatar;
+    this._avatar.alt = `Аватар пользователя ${data.name},${data.about}`;
   }
 
   getUserInfo() {
@@ -12,10 +20,8 @@ export class UserInfo {
     return data;
   }
 
-
   setUserInfo({ inputName, inputMission }) {
     this._name.textContent = inputName;
     this._mission.textContent = inputMission;
   }
-
 }

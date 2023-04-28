@@ -19,11 +19,16 @@
     <main class="main">
       <section class="profile">
         <div class="profile__container">
-          <img src="<%=require('./images/profile__avatar.jpg')%>" alt="Жак-Ив-Кусто. Фотография. Пртрет."
-            class="profile__avatar">
+          <div class="profile__wrapper-avatar">
+
+
+            <img src="<%=require('./images/profile__avatar.gif')%>" alt="Жак-Ив-Кусто. Фотография. Пртрет."
+              class="profile__avatar">
+            <button type="button" class="profile__avatar-button links"></button>
+          </div>
           <div class="profile__wrapper">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <p class="profile__mission">Исследователь океана</p>
+            <h1 class="profile__name"></h1>
+            <p class="profile__mission"></p>
             <button type="button" name="button-edit" aria-label="Редактировать профиль"
               class="profile__btn-edit links"></button>
           </div>
@@ -40,7 +45,6 @@
     </footer>
 
     <!-- ДОБАВИТЬ ПРЕВЬЮ -->
-
     <div class="popup popup_preview">
       <figure class="popup__figure">
         <img alt="Место" class="popup__image">
@@ -72,9 +76,7 @@
 
           </span>
 
-          <button type="submit" aria-label="Сохранить изменения в профиле" class="popup__submit">
-            Сохранить
-          </button>
+          <button type="submit" aria-label="Сохранить изменения в профиле" class="popup__submit">Сохранить</button>
 
         </form>
         <button type="button" name="button-close" aria-label="Закрыть окно"
@@ -82,7 +84,29 @@
       </div>
     </div>
 
+    <!-- ИЗМЕНИТЬ АВАТАР -->
+    <div class="popup popup_avatar">
+      <div class="popup__container">
+        <h2 class="popup__title">Обновить аватар</h2>
 
+        <form class="popup__form popup__form_avatar" name="popupForm" method="post" novalidate>
+
+          <input id="link" type="url" name="avatarLink" placeholder="Ссылка на картинку"
+            class="popup__input popup__input_link" required>
+
+          <span class="popup__error popup__error_link">
+          </span>
+
+          <button type="submit" aria-label="Добавить карточку с картинкой" class="popup__submit">
+            Сохранить
+          </button>
+
+        </form>
+
+        <button type="button" name="button-close" aria-label="Закрыть окно" class="popup__close popup__close_add links">
+        </button>
+      </div>
+    </div>
 
     <!-- ДОБАВИТЬ КАРТОЧКУ -->
     <div class="popup popup_add">
@@ -118,19 +142,36 @@
   </div>
 
 
+  <!-- УДАЛИТЬ КАРТОЧКУ -->
+  <div class="popup popup_trash">
+    <div class="popup__container">
+      <h2 class="popup__title">Вы уверены?</h2>
+
+      <form class="popup__form popup__form_trash" name="popupForm" method="post" novalidate>
+
+        <button type="submit" aria-label="Удалить карарточку с картинкой" class="popup__submit">
+          Да
+        </button>
+
+      </form>
+      <button type="button" name="button-close" aria-label="Закрыть окно"
+        class="popup__close popup__close_delete links"></button>
+    </div>
+  </div>
+
   <template id="template">
     <article class="grid-places__cards cards">
       <img alt="Место загруженное пользователем" class="cards__image">
       <div class="cards__wrapper">
         <h2 class="cards__title"></h2>
-        <button type="button" aria-label="Понравилось" class="cards__btn-like"></button>
+        <div class="cards__container-like">
+          <button type="button" aria-label="Понравилось" class="cards__btn-like"></button>
+          <p class="cards__counter-like">0</p>
+        </div>
       </div>
       <button class="cards__trash links"></button>
     </article>
   </template>
-
-
-
 
 </body>
 
