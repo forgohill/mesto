@@ -85,7 +85,6 @@ export class Card {
     this._trashButton = this._elementCard.querySelector('.cards__trash');
 
     this._likeButton.addEventListener('click', () => {
-      console.log('clickLike');
       this._handlerLike();
     });
 
