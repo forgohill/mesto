@@ -22,7 +22,8 @@
           <div class="profile__wrapper-avatar">
 
 
-            <img src="<%=require('./images/profile__avatar.gif')%>" alt="Жак-Ив-Кусто. Фотография. Пртрет." class="profile__avatar">
+            <img src="<%=require('./images/profile__avatar.gif')%>" alt="Жак-Ив-Кусто. Фотография. Пртрет."
+              class="profile__avatar">
             <button type="button" class="profile__avatar-button links"></button>
           </div>
           <div class="profile__wrapper">
@@ -76,9 +77,7 @@
 
           </span>
 
-          <button type="submit" aria-label="Сохранить изменения в профиле" class="popup__submit">
-            Сохранить
-          </button>
+          <button type="submit" aria-label="Сохранить изменения в профиле" class="popup__submit">Сохранить</button>
 
         </form>
         <button type="button" name="button-close" aria-label="Закрыть окно"
@@ -91,12 +90,8 @@
       <div class="popup__container">
         <h2 class="popup__title">Обновить аватар</h2>
 
-        <form
-        class="popup__form popup__form_avatar"
-        name="popupForm"
-        method="post"
-        novalidate>
-<!--
+        <form class="popup__form popup__form_avatar" name="popupForm" method="post" novalidate>
+          <!--
           <input
           id="foto"
           type="text"
@@ -111,33 +106,20 @@
           class="popup__error popup__error_foto">
           </span> -->
 
-          <input
-          id="link"
-          type="url"
-          name="avatarLink"
-          placeholder="Ссылка на картинку"
-          class="popup__input popup__input_link"
-          required>
+          <input id="link" type="url" name="avatarLink" placeholder="Ссылка на картинку"
+            class="popup__input popup__input_link" required>
 
-          <span
-          class="popup__error popup__error_link">
+          <span class="popup__error popup__error_link">
           </span>
 
-          <button
-          type="submit"
-          aria-label="Добавить карточку с картинкой"
-          class="popup__submit">
-          Сохранить
+          <button type="submit" aria-label="Добавить карточку с картинкой" class="popup__submit">
+            Сохранить
           </button>
 
         </form>
 
-        <button
-        type="button"
-        name="button-close"
-        aria-label="Закрыть окно"
-        class="popup__close popup__close_add links">
-      </button>
+        <button type="button" name="button-close" aria-label="Закрыть окно" class="popup__close popup__close_add links">
+        </button>
       </div>
     </div>
 
