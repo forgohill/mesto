@@ -8,9 +8,20 @@ export class PopupConfirmDelete extends Popup {
     this._popupForm = this._popup.querySelector('.popup__form');
     // this._popupImage = this._popup.querySelector('.popup__image');
     // this._popupTitle = this._popup.querySelector('.popup__figcaption');
+
+    this._buttonSubmit = this._popupForm.querySelector('.popup__submit');
+    this._startNameSubmit = this._buttonSubmit.textContent;
   }
 
   _disableSubmit(evt) { evt.preventDefault(); }
+
+  loadingProcess(startLoading, message) {
+    if (startLoading) {
+      this._buttonSubmit.textContent = message;
+    } else {
+      this._buttonSubmit.textContent = this._startNameSubmit;
+    }
+  }
 
   openPopup(card, cardId) {
     super.openPopup();

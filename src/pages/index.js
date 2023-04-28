@@ -42,8 +42,12 @@ const api = new Api(configApi);
 
 
 const handleFormEdit = (data) => {
-  api.patchUserInfo(data); // отправляем на сервер Имя и Проффессию
-  userInfo.setUserInfo(data);
+
+  patchUserInfo(data);
+  // api.patchUserInfo(data); // отправляем на сервер Имя и Проффессию
+
+  // userInfo.setUserInfo(data);
+  // userInfo.refreshUserInfo(data);
   editPopup.closePopup();
 }
 
@@ -52,9 +56,9 @@ const handleFormAdd = (data) => {
 }
 
 const handleFormAvatar = (avatarLink) => {
-console.log(avatarLink);
-patchAvatar(avatarLink);
-avatarPopup.closePopup();
+  console.log(avatarLink);
+  patchAvatar(avatarLink);
+  avatarPopup.closePopup();
 }
 
 const clickEdit = () => {
@@ -149,8 +153,31 @@ const initialLoadingCardsAndUserInfo = () => {
     })
 }
 
+const patchUserInfo = (data) => {
+  editPopup.loadingProcess(true, 'Сохранить...')
+  api.patchUserInfo(data)
+    .then((data) => {
+      userInfo.refreshUserInfo(data);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      editPopup.loadingProcess(false);
+      // loadingProcessUserInfo(editPopup);
+      // console.log('грузиловоЮзерИнфо');
+    });
+}
+
+// const loadingProcessUserInfo = (popup) => {
+//   console.log('грузилово')
+//   console.log(popup);
+//   // editPopup.loadingProcess();
+//   popup.loadingProcess(false);
+// }
 
 const setCardsApi = (data) => {
+  addPopup.loadingProcess(true, 'Загрузка...');
   // console.log(item);
   api.setCard({ name: data.inputFoto, link: data.inputLink })
     .then((data) => {
@@ -160,10 +187,14 @@ const setCardsApi = (data) => {
     })
     .catch((err) => {
       console.error(err);
+    })
+    .finally(() => {
+      addPopup.loadingProcess(false);
     });
 }
 
 const deleteCardApi = (card, cardId) => {
+  popupConfirmDelete.loadingProcess(true, 'Удаление...');
   api.deleteCard(cardId)
     .then(() => {
       card.deleteCard();
@@ -171,6 +202,9 @@ const deleteCardApi = (card, cardId) => {
     })
     .catch((err) => {
       console.error(err);
+    })
+    .finally(() => {
+      popupConfirmDelete.loadingProcess(false);
     });
 };
 
@@ -198,16 +232,20 @@ const deleteLikeCard = (card, likeId) => {
 
 
 const patchAvatar = (avatarLink) => {
+  avatarPopup.loadingProcess(true, 'Сохранение...');
   api.patchAvatar(avatarLink)
-  .then((data) => {
+    .then((data) => {
 
 
-    userInfo.refreshUserInfo(data);
+      userInfo.refreshUserInfo(data);
 
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      avatarPopup.loadingProcess(false);
+    });
 }
 
 // =================
