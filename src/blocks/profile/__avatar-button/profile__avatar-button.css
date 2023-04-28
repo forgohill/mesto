@@ -20,17 +20,9 @@
   background-color: rgba(0, 0, 0, 0.8);
 
   opacity: 0;
-  /* background-color: rgba(0, 0, 0, 0.0); */
-
-  /* background-color: transparent; */
-
 }
 
 .profile__avatar-button:hover {
   opacity: 1;
-  /* background-image: url(../../../images/__redactAvatar.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: rgba(0, 0, 0, 0.8); */
   cursor: pointer;
 }
