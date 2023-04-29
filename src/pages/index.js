@@ -39,6 +39,10 @@ const formValidatorAvatar = new FormValidator(formValidationConfig, formAvatar);
 
 // СОЗДАЕМ ОБРАБОТЧИК ПРОФИЛЯ
 const userInfo = new UserInfo(interactionConfig);
+
+// Глобальный ID пользователя
+let myId;
+
 // СОЗДАЁМ АПИ С КОНИФГУРАЦИЕЙ
 const api = new Api(configApi);
 
@@ -83,7 +87,8 @@ const clickAdd = () => {
 }
 
 // СОЗДАНИЕ новой карточки
-const createCard = (item, myId) => {
+// const createCard = (item, myId) => {
+const createCard = (item) => {
   const card = new Card(item,
     template,
     handleCardClick,
@@ -96,11 +101,11 @@ const createCard = (item, myId) => {
 };
 
 
-// ???
-const deleteCard = (card) => {
-  card.deleteCard();
-  popupConfirmDelete.closePopup(card);
-};
+// // ???
+// const deleteCard = (card) => {
+//   card.deleteCard();
+//   popupConfirmDelete.closePopup(card);
+// };
 
 // ОБРАБОТЧИК запуск привью при клике на карточку
 const handleCardClick = (name, link) => {
@@ -129,8 +134,8 @@ const popupConfirmDelete = new PopupConfirmDelete(interactionConfig.selectorPopu
 // СОЗДАНИЕ класса Секция , слой для введения карточек в body
 const addSectionCard = new Section(
   {
-    renderer: (item, myId) => {
-
+    // renderer: (item, myId) => {
+    renderer: (item) => {
       addSectionCard.addItem(createCard(item, myId));
     }
   },
@@ -143,7 +148,9 @@ const initialLoadingCardsAndUserInfo = () => {
   api.getCards()])
     .then((data) => {
       userInfo.refreshUserInfo(data[0]);
-      addSectionCard.renderItems(data[1], data[0]);
+      myId = data[0]._id;
+      addSectionCard.renderItems(data[1]);
+      // addSectionCard.renderItems(data[1], data[0]);
     })
     .catch((err) => {
       console.error(err);
