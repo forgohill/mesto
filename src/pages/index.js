@@ -49,7 +49,6 @@ const api = new Api(configApi);
 // ОБРАБОТЧИК формы редактировать профиль
 const handleFormEdit = (data) => {
   patchUserInfo(data);
-  editPopup.closePopup();
 }
 
 // ОБРАБОТЧИК формы добавления карточки
@@ -59,9 +58,7 @@ const handleFormAdd = (data) => {
 
 // ОБРАБОТЧИК формы редактирования аватара
 const handleFormAvatar = (avatarLink) => {
-  console.log(avatarLink);
   patchAvatar(avatarLink);
-  avatarPopup.closePopup();
 }
 
 // ОТКРЫТИЕ попап редактировать профиль
@@ -75,7 +72,6 @@ const clickEdit = () => {
 
 // ОТКРЫТИЕ попап редактировать аватар
 const clickAvatar = () => {
-  console.log('clickAvatar');
   formValidatorAvatar.resetValidation();
   avatarPopup.openPopup();
 }
@@ -87,7 +83,6 @@ const clickAdd = () => {
 }
 
 // СОЗДАНИЕ новой карточки
-// const createCard = (item, myId) => {
 const createCard = (item) => {
   const card = new Card(item,
     template,
@@ -99,13 +94,6 @@ const createCard = (item) => {
   const elementCard = card.returnCard();
   return elementCard;
 };
-
-
-// // ???
-// const deleteCard = (card) => {
-//   card.deleteCard();
-//   popupConfirmDelete.closePopup(card);
-// };
 
 // ОБРАБОТЧИК запуск привью при клике на карточку
 const handleCardClick = (name, link) => {
@@ -134,7 +122,6 @@ const popupConfirmDelete = new PopupConfirmDelete(interactionConfig.selectorPopu
 // СОЗДАНИЕ класса Секция , слой для введения карточек в body
 const addSectionCard = new Section(
   {
-    // renderer: (item, myId) => {
     renderer: (item) => {
       addSectionCard.addItem(createCard(item, myId));
     }
@@ -150,7 +137,6 @@ const initialLoadingCardsAndUserInfo = () => {
       userInfo.refreshUserInfo(data[0]);
       myId = data[0]._id;
       addSectionCard.renderItems(data[1]);
-      // addSectionCard.renderItems(data[1], data[0]);
     })
     .catch((err) => {
       console.error(err);
@@ -163,6 +149,7 @@ const patchUserInfo = (data) => {
   api.patchUserInfo(data)
     .then((data) => {
       userInfo.refreshUserInfo(data);
+      editPopup.closePopup();
     })
     .catch((err) => {
       console.error(err);
@@ -233,6 +220,7 @@ const patchAvatar = (avatarLink) => {
   api.patchAvatar(avatarLink)
     .then((data) => {
       userInfo.refreshUserInfo(data);
+      avatarPopup.closePopup();
     })
     .catch((err) => {
       console.error(err);
