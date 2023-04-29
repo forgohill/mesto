@@ -24,7 +24,7 @@ export class Card {
     this._deleteLike = deleteLikeCard; // удаляем лайк с сервера
 
     this._handleTrashCards = handleTrashCards; // нажатие на корзину
-    this._myId = myId; // объект в котором есть мой ID
+    this._myId = myId; // мой ID
   }
 
   // верификация наличия моего лайка в массиве лайков
@@ -34,7 +34,7 @@ export class Card {
     })
 
     if (arrayIdLike.some((element) => {
-      return element === this._myId._id;
+      return element === this._myId;
     })) {
       return true
     } return false;
@@ -111,8 +111,8 @@ export class Card {
 
     this._likeDisplay.textContent = this._lengthCounterLikes;
 
-    // отключаем корзину на чужих краточках
-    if (this._owner._id === this._myId._id) {
+    // отключаем корзину на чужих карточках
+    if (this._owner._id === this._myId) {
       return this._elementCard;
     } else {
       this._trashButton.style.display = 'none';

@@ -48,6 +48,7 @@
 
 /* ======================= POPUP =============================== */
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_preview/popup_preview.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__title/popup__title.css);
