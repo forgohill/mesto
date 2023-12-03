@@ -12,6 +12,11 @@
 
 Репозиторий для приложения учебного проекта `mesto`.
 
+<div id="badges" align="center">
+  <a target='_blank' rel='noreferrer' href="https://forgohill.github.io/mesto/">
+    <img src="https://img.shields.io/badge/Ссылка на проект-2AABED" alt="Telegram Badge"/>
+  </a>
+</div>
 
 ## 🧱 Функционал приложения :
 
